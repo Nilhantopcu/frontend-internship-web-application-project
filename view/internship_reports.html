@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Reports</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
-     <link rel="stylesheet" href="/public/css/internship_reports.css">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .approval-icon {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
-        <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Home Page</a>
+        <a class="navbar-brand" href="home" style="padding-left: 50px;">Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -19,16 +25,16 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="internship_application.html">Intership Application</a>
+                    <a class="nav-link" href="intershipapplication">Intership Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="my_internship_applications.html">My Intership Applications</a>
+                    <a class="nav-link" href="myinternshipapplications">My Intership Applications</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="internship_reports.html">Intership Reports</a>
+                    <a class="nav-link" href="intershipreports">Intership Reports</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profile</a>
+                    <a class="nav-link" href="profile">Profile</a>
                 </li>
             </ul>
         </div>
@@ -53,41 +59,45 @@
             </li>
         </ul>
     </nav>
-
-    <div class="container">
-        <div class="table-container">
-            <h1 class="table-title">My Internship Processes</h1>
-            <table class="table table-hover">
-                <thead>
-                      <tr>
-                        <th scope="col">Internship  Course Code</th>
-                        <th scope="col">Internship Report</th>
-                        <th scope="col">Evaluation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>4190/First Internship</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4290/Second Internship</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>4290/Second Internship</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                    
-                    <!-- Diğer satırlar -->
-                </tbody>
-            </table>
-        </div>
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">MY INTERNSHİP APPLICATIONS</h2>
     </div>
-    
-</body>
-</html>
+
+    <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Internship Course Code </th>
+                    <th> Internship Reports </th>
+                    <th>Evaluation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>290/First Intership</td>
+                    <td id="upload report">upload report</td>
+                    <td id="Evaluation">In the evaluation process </td>
+                </tr>
+                <tr>
+                    <td>290/First Intership</td>
+                    <td id="upload report">upload report</td>
+                    <td id="Evaluation">In the evaluation process </td>
+                </tr>
+                <tr>
+                    <td>290/First Intership</td>
+                    <td id="upload report">upload report</td>
+                    <td id="Evaluation">In the evaluation process </td>
+                </tr>
+                <tr>
+                    <td>290/First Intership</td>
+                    <td id="upload report">upload report</td>
+                    <td id="Evaluation">In the evaluation process </td>
+                </tr>
+                <!-- Diğer stajlar buraya eklenebilir -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <script src="https://code.jquer

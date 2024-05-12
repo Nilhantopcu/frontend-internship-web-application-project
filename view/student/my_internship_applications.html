@@ -15,32 +15,32 @@
 </head>
 
 <body>
-      <!-- TOP Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
-    <!-- Container wrapper -->
-    <div class="container-fluid">
+    <!-- TOP Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
-          src="/public/image/logo.png" alt="logo" class="logo-default">
-      </div>
-      <div class="d-flex align-items-center">
-        <!-- Avatar -->
-        <div class="dropdown">
-          <img src="/public/image/user.png" style="scale: 2.5;" class="rounded-circle" height="25" alt="Black and White Portrait of a Man"
-            loading="lazy" />
-          </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
+                    src="/public/image/logo.png" alt="logo" class="logo-default">
+            </div>
+            <div class="d-flex align-items-center">
+                <!-- Avatar -->
+                <div class="dropdown">
+                    <img src="/public/image/user.png" style="scale: 2.5;" class="rounded-circle" height="25"
+                        alt="Black and White Portrait of a Man" loading="lazy" />
+                    </a>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
         <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -57,7 +57,7 @@
                 </li>
             </ul>
         </div>
-    
+
         <!--Notification-->
         <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
             <li class="nav-item me-3 me-lg-0">
@@ -69,7 +69,7 @@
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
                             </path>
                         </svg>
-    
+
                     </button>
                 </div>
             </li>
@@ -78,7 +78,7 @@
             </li>
         </ul>
     </nav>
-    
+
     <div class="container mt-4">
         <h2 class="text-center mb-4">INTERNSHIP PROCESS</h2>
     </div>
@@ -97,31 +97,57 @@
             <tbody>
                 <tr>
                     <td>1</td>
-                    <td id="bolumBaskaniApproval">Onay Bekliyor</td>
-                    <td id="dekanApproval">Onay Bekliyor</td>
-                    <td id="stajKoordinatorluguApproval">Onay Bekliyor</td>
-                    <td>There is no SGK certificate</td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
+                    <td id="bolumBaskaniApproval">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                        </div>
+                    </td>
+                    <td id="dekanApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="stajKoordinatorluguApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td><button id="download-pdf" class="btn btn-primary">Download Form <i class="fa fa-download"></i></button></td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td id="bolumBaskaniApproval">Onay Bekliyor</td>
-                    <td id="dekanApproval">Onay Bekliyor</td>
-                    <td id="stajKoordinatorluguApproval">Onay Bekliyor</td>
-                    <td>There is no SGK certificate</td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
+                    <td id="bolumBaskaniApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="dekanApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="stajKoordinatorluguApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td><button id="download-pdf" class="btn btn-primary">Download Form <i class="fa fa-download"></i></button></td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td id="bolumBaskaniApproval">Onay Bekliyor</td>
-                    <td id="dekanApproval">Onay Bekliyor</td>
-                    <td id="stajKoordinatorluguApproval">Onay Bekliyor</td>
-                    <td>There is no SGK certificate</td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
+                    <td id="bolumBaskaniApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="dekanApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="stajKoordinatorluguApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td><button id="download-pdf" class="btn btn-primary">Download Form <i class="fa fa-download"></i></button></td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td id="bolumBaskaniApproval">Onay Bekliyor</td>
-                    <td id="dekanApproval">Onay Bekliyor</td>
-                    <td id="stajKoordinatorluguApproval">Onay Bekliyor</td>
-                    <td>There is no SGK certificate</td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
+                    <td id="bolumBaskaniApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="dekanApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td id="stajKoordinatorluguApproval"><div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled />
+                    </div></td>
+                    <td><button id="download-pdf" class="btn btn-primary">Download Form <i class="fa fa-download"></i></button></td> <!-- onay bekliyor yerinde belge indirme kısmı olmalı -->
                 </tr>
                 <!-- Diğer stajlar buraya eklenebilir -->
             </tbody>

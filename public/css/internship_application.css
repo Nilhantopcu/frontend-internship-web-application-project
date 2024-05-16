@@ -65,7 +65,7 @@ button:focus,
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 120%;
+    width: 100%;
     margin: 0 auto;
     left: 0;
     right: 0;

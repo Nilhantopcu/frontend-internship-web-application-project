@@ -4,12 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internship Processes </title>
+    <title>Internship Processes</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
         }
     </style>
 </head>
@@ -19,7 +30,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
         <div class="container-fluid">
-      
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
                     src="/public/image/logo.png" alt="logo" class="logo-default">
@@ -27,13 +37,12 @@
             <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="dropdown">
-                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px; " class="rounded-circle"
+                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px;" class="rounded-circle"
                         height="25" alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>
                 </div>
             </div>
         </div>
-      </nav>
+    </nav>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
         <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
@@ -44,7 +53,7 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="internship_processes.html">Intership Processes</a>
+                    <a class="nav-link" href="internship_processes.html">Internship Processes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="companies.html">Companies</a>
@@ -63,7 +72,6 @@
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
                             </path>
                         </svg>
-
                     </button>
                 </div>
             </li>
@@ -73,94 +81,61 @@
         </ul>
     </nav>
 
-    <div class="container mt-4">
+    <div class="container mt-4 content">
         <h2 class="text-center mb-4">INTERNSHIP PROCESSES</h2>
+
+        <div class="container mt-5">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Student's Name</th>
+                        <th>Internship Application Approval</th>
+                        <th>Internship Report</th>
+                        <th>Report Evaluation</th>
+                        <th>Internship Evaluation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Student name</td>
+                        <td>
+                            <a class="nav-link" href="internship_application_approval.html">View Application</a>
+                        </td>
+                        <td>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor"
+                                class="bi bi-download" viewBox="0 0 16 16">
+                                <path
+                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                                <path
+                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
+                            </svg>
+                        </td>
+                        <td>
+                            <select id="inputState" class="form-control">
+                                <option selected>Choose...</option>
+                                <option>PASSED</option>
+                                <option>FAILED</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a class="nav-link" href="view_form.html">View Form</a>
+                        </td>
+                    </tr>
+                    <!-- Diğer stajlar buraya eklenebilir -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="container mt-5">
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Student's Name </th>
-                    <th>Internship Application Approval</th>
-                    <th>Internship Report</th>
-                    <th>Report Evoluation</th>
-                    <th>Internship Evoluation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Student name</td>
-                    <td id="bolumBaskaniApproval">
-                        <a class="nav-link" href="internship_application_approval.html">View Application</a>
-                    </td>
-                    <td id="dekanApproval">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor"
-                            class="bi bi-download" viewBox="0 0 16 16">
-                            <path
-                                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                            <path
-                                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
-                        </svg>
-                    </td>
-                    <td id="stajKoordinatorluguApproval">
-                        <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>PASSED</option>
-                            <option>FAILED</option>
-                        </select>
-                    </td>
-                    <td>
-                        <a class="nav-link" href="view_form.html">View Form</a>
-                    </td>
-                </tr>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            2024 © FMV Işık University - Center for Educational Technologies
+        </div>
+    </footer>
 
-                <!-- Diğer stajlar buraya eklenebilir -->
-            </tbody>
-        </table>
-    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 
-    <script>
-        // Dekan onaylandığında
-        function approveByDean() {
-            localStorage.setItem("dekanOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
-
-        // Bölüm Başkanı onaylandığında
-        function approveByDepartmentHead() {
-            localStorage.setItem("bolumBaskaniOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
-
-        // Staj Koordinatörlüğü onaylandığında
-        function approveByInternshipCoordinator() {
-            localStorage.setItem("stajKoordinatorluguOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
-
-        // Tabloyu güncelleyen fonksiyon
-        function updateApprovalStatus() {
-            var bolumBaskaniOnay = localStorage.getItem("bolumBaskaniOnay");
-            var dekanOnay = localStorage.getItem("dekanOnay");
-            var stajKoordinatorluguOnay = localStorage.getItem("stajKoordinatorluguOnay");
-
-            // Tüm yetkililer onayladıysa
-            if (bolumBaskaniOnay === "Onaylandı" && dekanOnay === "Onaylandı" && stajKoordinatorluguOnay === "Onaylandı") {
-                document.getElementById("bolumBaskaniApproval").innerText = "Onaylandı";
-                document.getElementById("bolumBaskaniApproval").classList.add("text-success");
-                document.getElementById("dekanApproval").innerText = "Onaylandı";
-                document.getElementById("dekanApproval").classList.add("text-success");
-                document.getElementById("stajKoordinatorluguApproval").innerText = "Onaylandı";
-                document.getElementById("stajKoordinatorluguApproval").classList.add("text-success");
-            }
-        }
-
-        // Sayfa yüklendiğinde tabloyu güncelle
-        window.onload = updateApprovalStatus;
-    </script>
-
-    <script src="https://code.jquer
+</html>

@@ -11,6 +11,22 @@
             width: 20px;
             height: 20px;
         }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .bg-body-tertiary {
+            background-color: #f8f9fa !important;
+        }
+
     </style>
 </head>
 
@@ -76,6 +92,7 @@
         </ul>
     </nav>
 
+    <div class="content">
     <div class="container mt-4">
         <h2 class="text-center mb-4">INTERNSHIP PROCESSES</h2>
     </div>
@@ -180,6 +197,13 @@
             </tbody>
         </table>
     </div>
+</div>
+
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            2024 © FMV Işık University - Center for Educational Technologies
+        </div>
+    </footer>
 
     <script>
         // Dekan onaylandığında
@@ -224,4 +248,11 @@
         window.onload = updateApprovalStatus;
     </script>
 
-    <script src="https://code.jquer
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

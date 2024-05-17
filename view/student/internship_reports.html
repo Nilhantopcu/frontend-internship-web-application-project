@@ -11,12 +11,28 @@
             width: 20px;
             height: 20px;
         }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .bg-body-tertiary {
+            background-color: #f8f9fa !important;
+        }
     </style>
 </head>
 
 <body>
-      <!-- TOP Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
+    <!-- TOP Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
         <div class="container-fluid">
 
@@ -40,7 +56,7 @@
             aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -54,7 +70,7 @@
                 </li>
             </ul>
         </div>
-    
+
         <!--Notification-->
         <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
             <li class="nav-item me-3 me-lg-0">
@@ -66,55 +82,72 @@
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
                             </path>
                         </svg>
-    
+
                     </button>
                 </div>
             </li>
             <li class="nav-item" style="padding-left: 20px;">
-                <a class="nav-link" href="login">Log Out</a>
+                <a class="nav-link" href="/view/login.html">Log Out</a>
             </li>
         </ul>
     </nav>
-    
-    <div class="container mt-4">
-        <h2 class="text-center mb-4">MY INTERNSHİP APPLICATIONS</h2>
+
+    <div class="content">
+        <div class="container mt-4">
+            <h2 class="text-center mb-4">MY REPORTS</h2>
+        </div>
+
+        <div class="container mt-5">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Internship Course Code </th>
+                        <th> Internship Reports </th>
+                        <th>Evaluation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>290/First Intership</td>
+                        <td id="upload report"><input class="form-control" type="file" id="formFile"
+                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
+                        <td id="Evaluation">In the evaluation process </td>
+                    </tr>
+                    <tr>
+                        <td>290/First Intership</td>
+                        <td id="upload report"><input class="form-control" type="file" id="formFile"
+                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
+                        <td id="Evaluation">In the evaluation process </td>
+                    </tr>
+                    <tr>
+                        <td>290/First Intership</td>
+                        <td id="upload report"><input class="form-control" type="file" id="formFile"
+                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
+                        <td id="Evaluation">In the evaluation process </td>
+                    </tr>
+                    <tr>
+                        <td>290/First Intership</td>
+                        <td id="upload report"><input class="form-control" type="file" id="formFile"
+                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
+                        <td id="Evaluation">In the evaluation process </td>
+                    </tr>
+                    <!-- Diğer stajlar buraya eklenebilir -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="container mt-5">
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Internship Course Code </th>
-                    <th> Internship Reports </th>
-                    <th>Evaluation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>290/First Intership</td>
-                    <td id="upload report"><input class="form-control" type="file" id="formFile" data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                    <td id="Evaluation">In the evaluation process </td>
-                </tr>
-                <tr>
-                    <td>290/First Intership</td>
-                    <td id="upload report"><input class="form-control" type="file" id="formFile" data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                    <td id="Evaluation">In the evaluation process </td>
-                </tr>
-                <tr>
-                    <td>290/First Intership</td>
-                    <td id="upload report"><input class="form-control" type="file" id="formFile" data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                    <td id="Evaluation">In the evaluation process </td>
-                </tr>
-                <tr>
-                    <td>290/First Intership</td>
-                    <td id="upload report"><input class="form-control" type="file" id="formFile" data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                    <td id="Evaluation">In the evaluation process </td>
-                </tr>
-                <!-- Diğer stajlar buraya eklenebilir -->
-            </tbody>
-        </table>
-    </div>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            2024 © FMV Işık University - Center for Educational Technologies
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+</body>
 
-    <script src="https://code.jquer
+</html>

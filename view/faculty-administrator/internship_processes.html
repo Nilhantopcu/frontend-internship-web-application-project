@@ -4,12 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Companies </title>
+    <title>Internship Processes </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .bg-body-tertiary {
+            background-color: #f8f9fa !important;
         }
     </style>
 </head>
@@ -19,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
         <div class="container-fluid">
-      
+
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
                     src="/public/image/logo.png" alt="logo" class="logo-default">
@@ -33,7 +49,7 @@
                 </div>
             </div>
         </div>
-      </nav>
+    </nav>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
         <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Home Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
@@ -68,76 +84,52 @@
                 </div>
             </li>
             <li class="nav-item" style="padding-left: 20px;">
-                <a class="nav-link" href="login">Log Out</a>
+                <a class="nav-link" href="/view/login.html">Log Out</a>
             </li>
         </ul>
     </nav>
 
-    <div class="container mt-6">
-        <h2 class="text-center mb-6">INTERNSHIP PROCESSES</h2>
+    <div class="content">
+        <div class="container mt-4">
+            <h2 class="text-center mb-4">INTERNSHIP PROCESSES</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Student's Name</th>
+                                    <th>Academic unit approval</th>
+                                    <th>Faculty Administrator Approval</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Student name</td>
+                                    <td id="AcademicUnitApproval">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDisabled" disabled />
+                                        </div>
+                                    </td>
+                                    <td id="dekanApproval">
+                                        <a href="internship_application_approval.html">view application</a>
+                                    </td>
+                                </tr>
+
+
+                                <!-- Diğer satırlar buraya gelecek -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="container mt-6">
-        <table class="table table-bordered">
-            <thead class="thead-light">
-                <tr>
-                    <th>Student's Name </th>
-                    <th>Student's Department</th>
-                    <th>Company Name</th>
-                    <th>Companies Department</th>
-                    <th>Scoring</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody><tr>
-                <td>Student name</td>
-                <td>Software Engiinering</td>
-                <td>Atez Technology</td>
-                <td>Software Development Department</td>
-                <td id="DepartmentEvoluation">4
-
-                </td>
-                <td>Good</td>
-               
-            </tr>
-                <tr>
-                    <td>Student name</td>
-                    <td>Software Engiinering</td>
-                    <td>Atez Technology</td>
-                    <td>Software Development Department</td>
-                    <td id="DepartmentEvoluation">4
-
-                    </td>
-                    <td>Good</td>
-                   
-                </tr>
-                <tr>
-                    <td>Student name</td>
-                    <td>Software Engiinering</td>
-                    <td>Atez Technology</td>
-                    <td>Software Development Department</td>
-                    <td id="DepartmentEvoluation">4
-
-                    </td>
-                    <td>Good</td>
-                   
-                </tr>
-                <tr>
-                    <td>Student name</td>
-                    <td>Software Engiinering</td>
-                    <td>Atez Technology</td>
-                    <td>Software Development Department</td>
-                    <td id="DepartmentEvoluation">4
-
-                    </td>
-                    <td>Good</td>
-                   
-                </tr>
-
-                <!-- Diğer stajlar buraya eklenebilir -->
-            </tbody>
-        </table>
-    </div>
 
     <script>
         // Dekan onaylandığında
@@ -182,4 +174,16 @@
         window.onload = updateApprovalStatus;
     </script>
 
-    <script src="https://code.jquer
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            2024 © FMV Işık University - Center for Educational Technologies
+        </div>
+    </footer>
+    
+</body>
+
+</html>

@@ -3,14 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Internship Assessment Form</title>
-    <link rel="stylesheet" href="/public/css/internship_assesment_form.css">
-    <link rel="stylesheet" href="/public/js/internship_assesment_form.js">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link href="/public/css/internship_application.css" rel="stylesheet">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <style>
+        body {
+            background-color: rgb(252, 252, 252);
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .bg-body-tertiary {
+            background-color: #f8f9fa !important;
+        }
+
+        .options label {
+            width: 300px; /* Genişliği sabitleyin */
+        }
+        .form-select {
+            width: 100px; /* Select kutusunun genişliğini küçültün */
+        }
+
+        .step4 label{
+            white-space: nowrap; 
+        }
+
         .navbar {
             display: flex;
             justify-content: center;
@@ -23,352 +60,361 @@
             height: auto;
         } 
     </style>
+
+    <title>Document</title>
+
 </head>
 
 <body>
+    <!-- TOP Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
-        <div class="container-fluid">
+        <div class="container-fluid d-flex justify-content-center">
             <img src="/public/image/logo.png" alt="logo" class="logo-default">
         </div>
     </nav>
-    <section class="signup-step-container">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-8">
-                    <div class="wizard">
-                        <div class="wizard-inner">
-                            <div class="connecting-line"></div>
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
-                                        aria-expanded="true"><span class="round-tab">1 </span> <i>Step 1</i></a>
-                                </li>
-                                <li role="presentation" class="disabled">
-                                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
-                                        aria-expanded="false"><span class="round-tab">2</span> <i>Step 2</i></a>
-                                </li>
-                                <li role="presentation" class="disabled">
-                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span
-                                            class="round-tab">3</span> <i>Step 3</i></a>
-                                </li>
-                                <li role="presentation" class="disabled">
-                                    <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab"><span
-                                            class="round-tab">4</span> <i>Step 4</i></a>
-                                </li>
-                            </ul>
-                        </div>
+    
 
-                        <form role="form" action="index.html" class="login-box">
-                            <div class="tab-content" id="main_form">
-                                <div class="tab-pane active" role="tabpanel" id="step1">
-                                    <h4 class="text-center">Step 1</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First and Last Name *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Phone Number *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Email Address *</label>
-                                                <input class="form-control" type="email" name="name" placeholder="">
-                                            </div>
-                                        </div>
+    <div class="content">
+        <div class="container mt-4">
+            <h2 class="text-center mb-4">INTERNSHIP ASSESSMENT FORM</h2>
+        </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Password *</label>
-                                                <input class="form-control" type="password" name="name" placeholder="">
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn next-step">Continue to next
-                                                step</button></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="step2">
-                                    <h4 class="text-center">Step 2</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Address 1 *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>City / Town *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Country *</label>
-                                                <select name="country" class="form-control" id="country">
-                                                    <option value="NG" selected="selected">Nigeria</option>
-                                                    <option value="NU">Niue</option>
-                                                    <option value="NF">Norfolk Island</option>
-                                                    <option value="KP">North Korea</option>
-                                                    <option value="MP">Northern Mariana Islands</option>
-                                                    <option value="NO">Norway</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Registration No.</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                        <li><button type="button" class="default-btn next-step skip-btn">Skip</button>
-                                        </li>
-                                        <li><button type="button" class="default-btn next-step">Continue</button></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="step3">
-                                    <h4 class="text-center">Step 3</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Account Name *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Demo</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Inout</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Information</label>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFile">
-                                                    <label class="custom-file-label" for="customFile">Select
-                                                        file</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Number *</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Input Number</label>
-                                                <input class="form-control" type="text" name="name" placeholder="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                        <li><button type="button" class="default-btn next-step skip-btn">Skip</button>
-                                        </li>
-                                        <li><button type="button" class="default-btn next-step">Continue</button></li>
-                                    </ul>
-                                </div>
-                                <div class="tab-pane" role="tabpanel" id="step4">
-                                    <h4 class="text-center">Step 4</h4>
-                                    <div class="all-info-container">
-                                        <div class="list-content">
-                                            <a href="#listone" data-toggle="collapse" aria-expanded="false"
-                                                aria-controls="listone">Collapse 1 <i
-                                                    class="fa fa-chevron-down"></i></a>
-                                            <div class="collapse" id="listone">
-                                                <div class="list-box">
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>First and Last Name *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Phone Number *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-content">
-                                            <a href="#listtwo" data-toggle="collapse" aria-expanded="false"
-                                                aria-controls="listtwo">Collapse 2 <i
-                                                    class="fa fa-chevron-down"></i></a>
-                                            <div class="collapse" id="listtwo">
-                                                <div class="list-box">
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Address 1 *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>City / Town *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Country *</label>
-                                                                <select name="country2" class="form-control"
-                                                                    id="country2" disabled="disabled">
-                                                                    <option value="NG" selected="selected">Nigeria
-                                                                    </option>
-                                                                    <option value="NU">Niue</option>
-                                                                    <option value="NF">Norfolk Island</option>
-                                                                    <option value="KP">North Korea</option>
-                                                                    <option value="MP">Northern Mariana Islands</option>
-                                                                    <option value="NO">Norway</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Legal Form</label>
-                                                                <select name="legalform2" class="form-control"
-                                                                    id="legalform2" disabled="disabled">
-                                                                    <option value="" selected="selected">-Select an
-                                                                        Answer-</option>
-                                                                    <option value="AG">Limited liability company
-                                                                    </option>
-                                                                    <option value="GmbH">Public Company</option>
-                                                                    <option value="GbR">No minimum capital, unlimited
-                                                                        liability of partners, non-busines</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Business Registration No.</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Registered</label>
-                                                                <select name="vat2" class="form-control" id="vat2"
-                                                                    disabled="disabled">
-                                                                    <option value="" selected="selected">-Select an
-                                                                        Answer-</option>
-                                                                    <option value="yes">Yes</option>
-                                                                    <option value="no">No</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Seller</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div class="form-group">
-                                                                <label>Company Name *</label>
-                                                                <input class="form-control" type="password" name="name"
-                                                                    placeholder="" disabled="disabled">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="list-content">
-                                            <a href="#listthree" data-toggle="collapse" aria-expanded="false"
-                                                aria-controls="listthree">Collapse 3 <i
-                                                    class="fa fa-chevron-down"></i></a>
-                                            <div class="collapse" id="listthree">
-                                                <div class="list-box">
-                                                    <div class="row">
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Name *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="">
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label>Number *</label>
-                                                                <input class="form-control" type="text" name="name"
-                                                                    placeholder="">
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <ul class="list-inline pull-right">
-                                        <li><button type="button" class="default-btn prev-step">Back</button></li>
-                                        <li><button type="button" class="default-btn next-step">Finish</button></li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"></div>
+        <section style="margin-top: 50px;">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <div class="wizard">
+                            <div class="wizard-inner">
+                                <div class="connecting-line"></div>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"><span
+                                                class="round-tab">1 </span> <i>Step 1</i></a>
+                                    </li>
+                                    <li role="presentation" class="disabled">
+                                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"><span
+                                                class="round-tab">2</span> <i>Step 2</i></a>
+                                    </li>
+                                    <li role="presentation" class="disabled">
+                                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span
+                                                class="round-tab">3</span> <i>Step 3</i></a>
+                                    </li>
+                                    <li role="presentation" class="disabled">
+                                        <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab"><span
+                                                class="round-tab">4</span> <i>Step 4</i></a>
+                                    </li>
+                                </ul>
                             </div>
+
+                            <form role="form" action="/saveStudentStep1Info" method="POST">
+                                <div class="tab-content" id="main_form">
+                                    <div class="tab-pane active" role="tabpanel" id="step1">
+                                        <div class="row" style="margin-bottom: 15px;">
+                                            <div class="col-md-6" style="padding-top: 20px;">
+                                                <div class="form-group">
+                                                    <label><b>Company Name</b></label>
+                                                    <input class="form-control" type="email" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="padding-top: 20px;">
+                                                <div class="form-group">
+                                                    <label><b>Intership Number</b></label>
+                                                    <input class="form-control" type="email" name="name">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" style="margin-bottom: 15px;">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label><b>Company Address</b></label>
+                                                    <input class="form-control" type="email" name="name">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="d-flex justify-content-center">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <section class="container">
+                                                            <form>
+                                                                <div class="row form-group">
+                                                                    <label for="date"
+                                                                        style="padding-bottom: 10px; font-weight: bold;">Internship
+                                                                        Start Date:</label>
+                                                                    <div>
+                                                                        <div class="input-group date"
+                                                                            id="start_datepicker">
+                                                                            <input type="text" class="form-control">
+                                                                            <span class="input-group-append">
+                                                                                <span class="input-group-text bg-white">
+                                                                                    <i class="fa fa-calendar"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <section class="container">
+                                                            <form>
+                                                                <div class="row form-group">
+                                                                    <label for="date"
+                                                                        style="padding-bottom: 10px; font-weight: bold;">Internship
+                                                                        Finish Date:</label>
+                                                                    <div>
+                                                                        <div class="input-group date"
+                                                                            id="finish_datepicker">
+                                                                            <input type=" text" class="form-control">
+                                                                            <span class="input-group-append">
+                                                                                <span class="input-group-text bg-white">
+                                                                                    <i class="fa fa-calendar"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </form>
+
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row" style="margin-bottom: 15px;">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label><b>Internship Duration</b></label>
+                                                    <input class="form-control" type="text" name="name"
+                                                        placeholder="Write area">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="default-btn next-step">Continue to next
+                                                    step</button></li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="tab-pane" role="tabpanel" id="step2">
+                                        <div class="container" style="margin-bottom: 15px;">
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Sufficiency of internship report</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>General level of achievement in internship studies</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Willingness to acquire new professional knowledge and self-improvement</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Attendance, effort spent and discipline</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                        
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="default-btn prev-step">Back</button></li>
+                                            <li><button type="button" class="default-btn next-step">Continue</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="tab-pane" role="tabpanel" id="step3">
+                                        <div class="container" style="margin-bottom: 15px;">
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Behavior and communication with supervisors and colleagues</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Ability to apply the gained knowledge</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top: 20px;">
+                                                <div class="col-md-10">
+                                                    <div class="form-group d-flex align-items-center options">
+                                                        <label><b>Interest in contemporary problems <br> of profession</b></label>
+                                                        <select class="form-select">
+                                                            <option selected>Choose...</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="default-btn prev-step">Back</button></li>
+                                            <li><button type="button" class="default-btn next-step">Continue</button>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+
+                                    <div class="tab-pane" role="tabpanel" id="step4">
+                                        <div class="form-group step4">
+                                            <label class="col-sm-4 control-label" for="inputContact9"
+                                                style="margin-top: 10px;"><b>Additional comments about the intern (If any):</b></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" style="width: 600px; height: 200px;">
+                                            </div>
+                                        </div>
+                                        <div class="form-group step4">
+                                            <label class="col-sm-4 control-label" for="inputContact9"
+                                                style="margin-top: 10px;"><b>Title, name, and contact information of the authorized
+                                                person</b></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" style="width: 600px; line-height: 50px;">
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="default-btn prev-step">Back</button></li>
+                                            <li><button type="button" class="default-btn next-step">Finish</button>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                        </div>
 
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
     </section>
+
+    </div>
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+            2024 © FMV Işık University - Center for Educational Technologies
+        </div>
+    </footer>
+
+
+    </div>
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/public/js/internship_application.js"></script>
+    <!-- Datepicker JS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
 
+    <script type="text/javascript">
+        $(function () {
+            $('#start_datepicker, #finish_datepicker').datepicker();
+        })
+
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datepicker').datepicker({
+                multidate: true,
+                format: 'dd-mm-yyyy'
+            })
+        })
+    </script>
 
 </body>
 

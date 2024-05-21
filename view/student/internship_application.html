@@ -113,58 +113,102 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="productionArea" class="form-label">Production Area</label>
-                        <input type="text" class="form-control" id="productionArea">
+                    <div class="row g-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="productionArea" class="form-label">Production Area</label>
+                                <input type="text" class="form-control" id="productionArea">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="companyPhoneNumber" class="form-label">Company Phone Number</label>
+                                <input type="text" class="form-control" id="companyPhoneNumber">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="companyPhoneNumber" class="form-label">Company Phone Number</label>
-                        <input type="text" class="form-control" id="companyPhoneNumber">
+                    <div class="row g-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="companyEmailAddress" class="form-label">Company Email Address</label>
+                                <input type="email" class="form-control" id="companyEmailAddress">
+                            </div>
+                            <div class="mb-3">
+                                <label for="internshipNumber" class="form-label">Internship Number</label>
+                                <input list="internshipNumbers" class="form-control" id="internshipNumber"
+                                    aria-describedby="internshipNumber">
+                                <datalist id="internshipNumbers">
+                                    <option value="First">
+                                    <option value="Secondary">
+                                    <option value="Volunteer">
+                                        <!-- Daha fazla seçenek eklenebilir -->
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="companyAddress" class="form-label">Company Address</label>
+                                <input type="text" class="form-control" id="companyAddress" style="height: 126px;">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="companyEmailAddress" class="form-label">Company Email Address</label>
-                        <input type="email" class="form-control" id="companyEmailAddress">
+                    <div class="row g-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="sameDepartmentGraduate" class="form-label"><b>Is there anyone who graduated
+                                        from
+                                        the
+                                        same department as you in the department where you will do your
+                                        internship?</b></label><br>
+                                <input list="sameDepartmentGraduateOptions" class="form-control"
+                                    id="sameDepartmentGraduate" aria-describedby="sameDepartmentGraduate">
+                                <datalist id="sameDepartmentGraduateOptions">
+                                    <option value="yes">
+                                    <option value="no">
+                                        <!-- Daha fazla seçenek eklenebilir -->
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="correspondingPerson" class="form-label">Corresponding Person Name:</label>
+                                <input type="text" class="form-control" id="correspondingPerson" style="margin-top: 23px;">
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="companyAddress" class="form-label">Company Address</label>
-                        <input type="text" class="form-control" id="companyAddress">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="internshipNumber" class="form-label">Internship Number</label>
-                        <input list="internshipNumbers" class="form-control" id="internshipNumber"
-                            aria-describedby="internshipNumber">
-                        <datalist id="internshipNumbers">
-                            <option value="First">
-                            <option value="Secondary">
-                            <option value="Volunteer">
-                                <!-- Daha fazla seçenek eklenebilir -->
-                        </datalist>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="sameDepartmentGraduate" class="form-label"><b>Is there anyone who graduated from the
-                                same department as you in the department where you will do your
-                                internship?</b></label><br>
-                        <input list="sameDepartmentGraduateOptions" class="form-control" id="sameDepartmentGraduate"
-                            aria-describedby="sameDepartmentGraduate">
-                        <datalist id="sameDepartmentGraduateOptions">
-                            <option value="yes">
-                            <option value="no">
-                                <!-- Daha fazla seçenek eklenebilir -->
-                        </datalist>
+                    <div class="row g-3">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label for="internshipDays" class="form-label">Internship Days</label>
+                                <input type="text" class="form-control" id="internshipDays"
+                                    placeholder="Monday, Tuesday, Wednesday, Thursday ...">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="datepicker" class="font-weight-bold">Internship Dates:</label>
+                                <div class="input-group date" id="datepicker">
+                                    <input type="text" class="form-control" id="dates"
+                                        placeholder="Pick the multiple dates">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row g-3">
                         <div class="col">
                             <div class="form-group">
-                                <label for="startDate" style="padding-bottom: 10px; font-weight: bold;">Internship Start
-                                    Date:</label>
+                                <label for="startDate" style="padding-bottom: 10px; font-weight: bold;">Internship
+                                    Start Date:</label>
                                 <div class="input-group date" id="start_datepicker">
-                                    <input type="text" class="form-control" id="startDate">
+                                    <input type="text" class="form-control" id="startDate" placeholder="dd-mm-yyyy">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white">
                                             <i class="fa fa-calendar"></i>
@@ -178,7 +222,7 @@
                                 <label for="finishDate" style="padding-bottom: 10px; font-weight: bold;">Internship
                                     Finish Date:</label>
                                 <div class="input-group date" id="finish_datepicker">
-                                    <input type="text" class="form-control" id="finishDate">
+                                    <input type="text" class="form-control" id="finishDate" placeholder="dd-mm-yyyy">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white">
                                             <i class="fa fa-calendar"></i>
@@ -203,51 +247,85 @@
     </footer>
 
     <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-    <script>
-        document.getElementById('internshipForm').addEventListener('submit', async function (event) {
-            event.preventDefault();
-
-            const formData = {
-                companyName: document.getElementById('companyName').value,
-                departmentName: document.getElementById('departmentName').value,
-                productionArea: document.getElementById('productionArea').value,
-                companyPhoneNumber: document.getElementById('companyPhoneNumber').value,
-                companyEmailAddress: document.getElementById('companyEmailAddress').value,
-                companyAddress: document.getElementById('companyAddress').value,
-                internshipNumber: document.getElementById('internshipNumber').value,
-                sameDepartmentGraduate: document.getElementById('sameDepartmentGraduate').value,
-                startDate: document.getElementById('startDate').value,
-                finishDate: document.getElementById('finishDate').value,
-            };
-
-            try {
-                const response = await fetch('http://localhost:3000/internship', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                if (response.ok) {
-                    alert('Internship application submitted successfully!');
-                    window.location.href = '/view/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
-                } else {
-                    const errorData = await response.json();
-                    console.error('Error response:', errorData);
-                    alert('Failed to submit internship application: ' + (errorData.message || 'Unknown error'));
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('An error occurred while submitting the application.');
-            }
+    <script type="text/javascript">
+        $(function () {
+            $('#start_datepicker, #finish_datepicker').datepicker({
+                format: 'dd-mm-yyyy',
+                todayHighlight: true,
+                autoclose: true
+            });
         });
+
+        $(function () {
+            $('#datepicker').datepicker({
+                multidate: true,
+                format: 'dd-mm-yyyy'
+            });
+        });
+
     </script>
+
+
+
+<script>
+    document.getElementById('internshipForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const dates = $('#datepicker').datepicker('getDates').map(date => {
+            return new Date(date).toISOString().slice(0, 10); // ISO formatında kısa tarih
+        });
+
+        // Tarih sayısını kontrol ediyoruz
+        if (dates.length !== 20) {
+            alert('You must select exactly 20 dates.');
+            return; // Form gönderimini durdur
+        }
+
+        const formData = {
+            companyName: document.getElementById('companyName').value,
+            departmentName: document.getElementById('departmentName').value,
+            productionArea: document.getElementById('productionArea').value,
+            companyPhoneNumber: document.getElementById('companyPhoneNumber').value,
+            companyEmailAddress: document.getElementById('companyEmailAddress').value,
+            companyAddress: document.getElementById('companyAddress').value,
+            internshipNumber: document.getElementById('internshipNumber').value,
+            sameDepartmentGraduate: document.getElementById('sameDepartmentGraduate').value,
+            startDate: document.getElementById('startDate').value,
+            finishDate: document.getElementById('finishDate').value,
+            internshipDays: document.getElementById('internshipDays').value,
+            correspondingPerson: document.getElementById('correspondingPerson').value,
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/internship', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert('Internship application submitted successfully!');
+                window.location.href = '/view/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
+            } else {
+                const errorData = await response.json();
+                console.error('Error response:', errorData);
+                alert('Failed to submit internship application: ' + (errorData.message || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the application.');
+        }
+    });
+</script>
+
 
 </body>
 

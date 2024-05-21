@@ -81,7 +81,7 @@
 
             <!-- Form -->
             <div class="card-header" style="color:#007bff;">
-                INTERNSHIP APPLICATION FORM
+                INTERNSHIP APPLICATION FORM - STEP 1
             </div>
             <div class="container my-5">
                 <form id="internshipForm">
@@ -174,7 +174,8 @@
                         <div class="col">
                             <div class="mb-3">
                                 <label for="correspondingPerson" class="form-label">Corresponding Person Name:</label>
-                                <input type="text" class="form-control" id="correspondingPerson" style="margin-top: 23px;">
+                                <input type="text" class="form-control" id="correspondingPerson"
+                                    style="margin-top: 23px;">
                             </div>
                         </div>
                     </div>
@@ -272,59 +273,61 @@
 
 
 
-<script>
-    document.getElementById('internshipForm').addEventListener('submit', async function (event) {
-        event.preventDefault();
+    <script>
+        document.getElementById('internshipForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
 
-        const dates = $('#datepicker').datepicker('getDates').map(date => {
-            return new Date(date).toISOString().slice(0, 10); // ISO formatında kısa tarih
-        });
-
-        // Tarih sayısını kontrol ediyoruz
-        if (dates.length !== 20) {
-            alert('You must select exactly 20 dates.');
-            return; // Form gönderimini durdur
-        }
-
-        const formData = {
-            companyName: document.getElementById('companyName').value,
-            departmentName: document.getElementById('departmentName').value,
-            productionArea: document.getElementById('productionArea').value,
-            companyPhoneNumber: document.getElementById('companyPhoneNumber').value,
-            companyEmailAddress: document.getElementById('companyEmailAddress').value,
-            companyAddress: document.getElementById('companyAddress').value,
-            internshipNumber: document.getElementById('internshipNumber').value,
-            sameDepartmentGraduate: document.getElementById('sameDepartmentGraduate').value,
-            startDate: document.getElementById('startDate').value,
-            finishDate: document.getElementById('finishDate').value,
-            internshipDays: document.getElementById('internshipDays').value,
-            correspondingPerson: document.getElementById('correspondingPerson').value,
-        };
-
-        try {
-            const response = await fetch('http://localhost:3000/internship', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
-                },
-                body: JSON.stringify(formData),
+            const dates = $('#datepicker').datepicker('getDates').map(date => {
+                return new Date(date).toISOString().slice(0, 10); // ISO formatında kısa tarih
             });
 
-            if (response.ok) {
-                alert('Internship application submitted successfully!');
-                window.location.href = '/view/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
-            } else {
-                const errorData = await response.json();
-                console.error('Error response:', errorData);
-                alert('Failed to submit internship application: ' + (errorData.message || 'Unknown error'));
+            // Tarih sayısını kontrol ediyoruz
+            if (dates.length !== 20) {
+                alert('You must select exactly 20 dates.');
+                return; // Form gönderimini durdur
             }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred while submitting the application.');
-        }
-    });
-</script>
+
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                departmentName: document.getElementById('departmentName').value,
+                productionArea: document.getElementById('productionArea').value,
+                companyPhoneNumber: document.getElementById('companyPhoneNumber').value,
+                companyEmailAddress: document.getElementById('companyEmailAddress').value,
+                companyAddress: document.getElementById('companyAddress').value,
+                internshipNumber: document.getElementById('internshipNumber').value,
+                sameDepartmentGraduate: document.getElementById('sameDepartmentGraduate').value,
+                startDate: document.getElementById('startDate').value,
+                finishDate: document.getElementById('finishDate').value,
+                internshipDays: document.getElementById('internshipDays').value,
+                correspondingPerson: document.getElementById('correspondingPerson').value,
+            };
+
+            localStorage.setItem('internshipFormData', JSON.stringify(formData));
+
+            try {
+                const response = await fetch('http://localhost:3000/internship', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (response.ok) {
+                    alert('Internship application submitted successfully!');
+                    window.location.href = '/view/student/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
+                } else {
+                    const errorData = await response.json();
+                    console.error('Error response:', errorData);
+                    alert('Failed to submit internship application: ' + (errorData.message || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the application.');
+            }
+        });
+    </script>
 
 
 </body>

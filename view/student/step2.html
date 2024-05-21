@@ -1,12 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Internship Application</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- HTML2PDF CDN link -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 3px;
+        }
+
+        #doc-content {
+            padding: 20px;
+            background: #fff;
+        }
+    </style>
 </head>
+
 <body>
-    <h2>step2</h2>
-    
+    <div class="wrapper">
+        <!-- ÜST Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <img src="/public/image/logo.png" alt="logo" class="logo-default"
+                        style="width: 270px; margin: 5px 0 5px 0;">
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown">
+                        <img src="/public/image/user.png" class="rounded-circle" height="25" alt="Kullanıcı Avatarı"
+                            loading="lazy" style="transform: scale(2.5); margin-right: 15px;">
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- İkinci Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
+            <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Ana Sayfa</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+                aria-controls="navbarColor03" aria-expanded="false" aria-label="Menüyü Değiştir">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="internship_application.html">Staj Başvurusu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="my_internship_applications.html">Başvurularım</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="internship_reports.html">Staj Raporları</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Bildirim ve Çıkış -->
+            <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
+                <li class="nav-item me-3 me-lg-0">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-bell" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                </li>
+                <li class="nav-item" style="padding-left: 20px;">
+                    <a class="nav-link" href="/view/login.html">Çıkış Yap</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container" style="margin-top: 30px;">
+            <div class="card">
+                <div class="card-header" style="color:#007bff;">
+                    INTERNSHIP APPLICATION FORM - STEP 2
+                </div>
+                <div class="container my-5">
+                    <button id="download-docx" class="btn btn-primary">Download Form <i
+                            class="fa fa-download"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-light text-center text-lg-start">
+            <div class="text-center p-3">
+                2024 © FMV Işık Üniversitesi - Eğitim Teknolojileri Merkezi
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        document.getElementById('download-docx').addEventListener('click', function () {
+            const formData = JSON.parse(localStorage.getItem('internshipFormData'));
+
+            if (!formData) {
+                alert('Form data not found');
+                return;
+            }
+
+            // Fetch doc.html content
+            fetch('doc.html')
+                .then(response => response.text())
+                .then(docContent => {
+                    // Replace placeholders in doc.html with form data
+                    docContent = docContent
+                        .replace('<!--companyName-->', formData.companyName || '')
+                        .replace('<!--departmentName-->', formData.departmentName || '')
+                        .replace('<!--productionArea-->', formData.productionArea || '')
+                        .replace('<!--companyPhoneNumber-->', formData.companyPhoneNumber || '')
+                        .replace('<!--companyEmailAddress-->', formData.companyEmailAddress || '')
+                        .replace('<!--companyAddress-->', formData.companyAddress || '')
+                        .replace('<!--internshipNumber-->', formData.internshipNumber || '')
+                        .replace('<!--sameDepartmentGraduate-->', formData.sameDepartmentGraduate || '')
+                        .replace('<!--startDate-->', formData.startDate || '')
+                        .replace('<!--finishDate-->', formData.finishDate || '')
+                        .replace('<!--internshipDays-->', formData.internshipDays || '')
+                        .replace('<!--correspondingPerson-->', formData.correspondingPerson || '');
+
+                    // Create a temporary element to hold the updated docContent
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = docContent;
+
+                    // Convert the content to PDF
+                    const options = {
+                        filename: 'internship-application.pdf',
+                        margin: 1,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { scale: 2 },
+                        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+                    };
+                    html2pdf().set(options).from(tempElement).save();
+                })
+                .catch(error => {
+                    console.error('Error fetching doc.html:', error);
+                    alert('An error occurred while generating the PDF.');
+                });
+        });
+    </script>
+
+
 </body>
+
 </html>

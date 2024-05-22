@@ -281,6 +281,12 @@
                 return new Date(date).toISOString().slice(0, 10); // ISO formatında kısa tarih
             });
 
+            const sameDepartmentGraduate = document.getElementById('sameDepartmentGraduate').value;
+            if (sameDepartmentGraduate.toLowerCase() === 'no'){
+                alert('There must be someone who graduated from the same department as you in the department where you will do your internship.');
+                return; 
+            }
+
             // Tarih sayısını kontrol ediyoruz
             if (dates.length !== 20) {
                 alert('You must select exactly 20 dates.');

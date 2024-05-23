@@ -272,7 +272,44 @@
     </script>
 
 
-
+    <script>
+        document.getElementById('companyName').addEventListener('input', async function () {
+            const companyName = this.value;
+            if (companyName) {
+                try {
+                    const response = await fetch(`http://localhost:3000/company/getByName?companyName=${encodeURIComponent(companyName)}`);
+                    if (response.ok) {
+                        const company = await response.json();
+                        if (company) {
+                            document.getElementById('departmentName').value = company.departmentName || '';
+                            document.getElementById('productionArea').value = company.productionArea || '';
+                            document.getElementById('companyPhoneNumber').value = company.companyPhoneNumber || '';
+                            document.getElementById('companyEmailAddress').value = company.companyEmailAddress || '';
+                            document.getElementById('companyAddress').value = company.companyAddress || '';
+                        } else {
+                            // Şirket bulunamadığında formu temizleyin
+                            document.getElementById('departmentName').value = '';
+                            document.getElementById('productionArea').value = '';
+                            document.getElementById('companyPhoneNumber').value = '';
+                            document.getElementById('companyEmailAddress').value = '';
+                            document.getElementById('companyAddress').value = '';
+                        }
+                    } else {
+                        console.error('Failed to fetch company data');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            } else {
+                // Şirket adı boş olduğunda formu temizleyin
+                document.getElementById('departmentName').value = '';
+                document.getElementById('productionArea').value = '';
+                document.getElementById('companyPhoneNumber').value = '';
+                document.getElementById('companyEmailAddress').value = '';
+                document.getElementById('companyAddress').value = '';
+            }
+        });
+    </script>
     <script>
         document.getElementById('internshipForm').addEventListener('submit', async function (event) {
             event.preventDefault();
@@ -282,9 +319,9 @@
             });
 
             const sameDepartmentGraduate = document.getElementById('sameDepartmentGraduate').value;
-            if (sameDepartmentGraduate.toLowerCase() === 'no'){
+            if (sameDepartmentGraduate.toLowerCase() === 'no') {
                 alert('There must be someone who graduated from the same department as you in the department where you will do your internship.');
-                return; 
+                return;
             }
 
             // Tarih sayısını kontrol ediyoruz
@@ -334,6 +371,9 @@
             }
         });
     </script>
+
+
+
 
 
 </body>

@@ -12,7 +12,8 @@
             height: 20px;
         }
 
-        html, body {
+        html,
+        body {
             height: 100%;
             margin: 0;
             display: flex;
@@ -95,33 +96,8 @@
                         <th>Internship Evaluation</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Student name</td>
-                        <td>
-                            <a class="nav-link" href="internship_application_approval.html">View Application</a>
-                        </td>
-                        <td>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor"
-                                class="bi bi-download" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
-                                <path
-                                    d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z" />
-                            </svg>
-                        </td>
-                        <td>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>PASSED</option>
-                                <option>FAILED</option>
-                            </select>
-                        </td>
-                        <td>
-                            <a class="nav-link" href="view_form.html">View Form</a>
-                        </td>
-                    </tr>
-                    <!-- Diğer stajlar buraya eklenebilir -->
+                <tbody id="departmentInternshipTableBody">
+                    <!-- Dinamik olarak eklenecek stajlar -->
                 </tbody>
             </table>
         </div>
@@ -136,6 +112,50 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+        async function loadStudentName() {
+            try {
+                const response = await fetch('http://localhost:3000/internship/details', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Include if using JWT
+                        'Content-Type': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    const internships = await response.json();
+                    const tableBody = document.getElementById('departmentInternshipTableBody');
+                    tableBody.innerHTML = '';
+
+                    internships.forEach(internship => {
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                        <td>${internship.studentName}</td>
+                        <td><a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a></td>
+                        <td><svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"></path>
+                            </svg></td>
+                        <td><select id="inputState" class="form-control">
+                            <option selected>Choose...</option>
+                            <option>PASSED</option>
+                            <option>FAILED</option>
+                        </select></td>
+                        <td><a class="nav-link" href="view_form.html">View Form</a></td>
+                        `;
+                        tableBody.appendChild(newRow);
+                    });
+                } else {
+                    console.error('Failed to fetch student name');
+                }
+            } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+            document.addEventListener('DOMContentLoaded', loadStudentName);
+    </script>
+
 </body>
 
 </html>

@@ -358,6 +358,9 @@
                 });
 
                 if (response.ok) {
+                    const result = await response.json()
+                    const internshipID = result.id;
+                    localStorage.setItem('internshipId', internshipID);
                     alert('Internship application submitted successfully!');
                     window.location.href = '/view/student/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
                 } else {

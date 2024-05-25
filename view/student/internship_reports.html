@@ -6,10 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Reports</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!-- Added FontAwesome -->
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
+            margin-left: 10px;
         }
 
         html,
@@ -60,13 +63,13 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="internship_application.html">Intership Application</a>
+                    <a class="nav-link" href="internship_application.html">Internship Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="my_internship_applications.html">My Intership Applications</a>
+                    <a class="nav-link" href="my_internship_applications.html">My Internship Applications</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="internship_reports.html">Intership Reports</a>
+                    <a class="nav-link" href="internship_reports.html">Internship Reports</a>
                 </li>
             </ul>
         </div>
@@ -106,32 +109,8 @@
                         <th>Evaluation</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>290/First Intership</td>
-                        <td id="upload report"><input class="form-control" type="file" id="formFile"
-                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                        <td id="Evaluation">In the evaluation process </td>
-                    </tr>
-                    <tr>
-                        <td>290/First Intership</td>
-                        <td id="upload report"><input class="form-control" type="file" id="formFile"
-                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                        <td id="Evaluation">In the evaluation process </td>
-                    </tr>
-                    <tr>
-                        <td>290/First Intership</td>
-                        <td id="upload report"><input class="form-control" type="file" id="formFile"
-                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                        <td id="Evaluation">In the evaluation process </td>
-                    </tr>
-                    <tr>
-                        <td>290/First Intership</td>
-                        <td id="upload report"><input class="form-control" type="file" id="formFile"
-                                data-sider-select-id="04d355d7-f036-441e-ad17-9411d7aa05a6"></td>
-                        <td id="Evaluation">In the evaluation process </td>
-                    </tr>
-                    <!-- Diğer stajlar buraya eklenebilir -->
+                <tbody id="internshipTableBody">
+                    <!-- Dynamic content will be inserted here -->
                 </tbody>
             </table>
         </div>
@@ -146,7 +125,61 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const response = await fetch('http://localhost:3000/internship', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                },
+            });
+            const internships = await response.json();
+            const tableBody = document.getElementById('internshipTableBody');
 
+            for (const internship of internships) {
+                const reportsResponse = await fetch(`http://localhost:3000/reports/${internship.id}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                    },
+                });
+                const reports = await reportsResponse.json();
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${internship.internshipNumber}</td>
+                    <td>
+                        ${reports.length > 0 ?
+                        `<a href="http://localhost:3000/reports/download/${reports[0].Internship_Report}" target="_blank">${reports[0].Internship_Report}</a>
+                             <i class="fas fa-check approval-icon"></i>`
+                        : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
+                    </td>
+                    <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
+                `;
+                tableBody.appendChild(row);
+            }
+        });
+
+        async function uploadReport(event) {
+            const fileInput = event.target;
+            const internshipId = fileInput.getAttribute('data-internship-id');
+            const formData = new FormData();
+            formData.append('Internship_Report', fileInput.files[0]);
+
+            await fetch(`http://localhost:3000/reports/${internshipId}/upload`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                },
+                body: formData,
+            });
+
+            alert('Report uploaded successfully');
+            location.reload(); // Reload the page to update the table
+        }
+    </script>
 
 </body>
 

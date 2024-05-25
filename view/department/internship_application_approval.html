@@ -164,8 +164,10 @@
                                             <div class="form-group">
                                                 <div class="col-sm-offset-4 col-sm-8">
                                                     <div class="btn-group">
-                                                        <button type="button" class="btn btn-primary btn-lg" onclick="updateStatus('WAITING_IN_DEAN')">ACCEPTED</button>
-                                                        <button type="button" class="btn btn-secondary btn-lg" onclick="updateStatus('REJECT')">REJECTED</button>
+                                                        <button type="button" class="btn btn-primary btn-lg"
+                                                            onclick="updateStatus('WAITING_IN_DEAN')">ACCEPTED</button>
+                                                        <button type="button" class="btn btn-secondary btn-lg"
+                                                            onclick="updateStatus('REJECT')">REJECTED</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -178,6 +180,16 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed botto-0 end-0 p-3">
+        <div id="statusToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastBody"></div>
         </div>
     </div>
 
@@ -222,7 +234,7 @@
                         console.error('Internship not found');
                         return;
                     }
-                    
+
                     // HTML öğelerini doldur
                     document.getElementById('fullName').textContent = internship.studentName || 'N/A';
                     document.getElementById('studentId').textContent = internship.user.student.studentId || 'N/A';
@@ -241,11 +253,10 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', loadInternDetails);
-    
+
         async function updateStatus(status) {
             const internshipId = getQueryParam('id');
-            if(!internshipId){
+            if (!internshipId) {
                 console.error('No internship ID provided in the URL');
                 return;
             }
@@ -260,9 +271,12 @@
                     body: JSON.stringify({ status })
                 });
 
-                if (response.ok){
+                if (response.ok) {
                     const updatedInternship = await response.json();
-                    console.log('Internship status updated:', updatedInternship);
+                    showNotification(`Internship status updated to ${status}`);
+                    setTimeout(() => {
+                        window.location.href = '/view/department/internship_processes.html';
+                    }, 2000); // 2 saniye sonra yönlendirme yapıyor
                 } else {
                     console.error('Failed to update internship status');
                 }
@@ -271,9 +285,15 @@
             }
         }
 
+        function showNotification(message) {
+            document.getElementById('toastBody').textContent = message;
+            const toastElement = document.getElementById('statusToast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        }
+
         document.addEventListener('DOMContentLoaded', loadInternDetails);
-    
-    
+
     </script>
 </body>
 

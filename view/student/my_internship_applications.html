@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Internship Applications</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+
     <style>
         .approval-icon {
             width: 20px;
@@ -136,17 +140,62 @@
                     const internships = await response.json();
                     const tableBody = document.getElementById('internshipTableBody');
                     tableBody.innerHTML = ''; // Clear existing rows
-
+    
                     internships.forEach(internship => {
                         const newRow = document.createElement('tr');
+                        let academicUnitApproval = '';
+                        let facultyAdministratorApproval = '';
+                        let internshipCoordinatorApproval = '';
+                        let downloadButton = '';
+    
+                        switch (internship.status) {
+                            case 'WAITING_IN_DEPARTMENT_HEAD':
+                                academicUnitApproval = 'WAITING';
+                                break;
+                            case 'WAITING_IN_DEAN':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = 'WAITING';
+                                break;
+                            case 'WAITING_IN_INTERNSHIP_COORDINATOR':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                internshipCoordinatorApproval = 'WAITING';
+                                break;
+                            case 'INSURANCE_ENTRY_DONE':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                internshipCoordinatorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
+                                break;
+                            case 'REJECT':
+                                academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
+                                break;
+                            default:
+                                downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
+                                break;
+                        }
+    
                         newRow.innerHTML = `
                             <td>${internship.internshipNumber}</td>
-                            <td>${internship.academicUnitApproval}</td>
-                            <td>${internship.facultyAdministratorApproval}</td>
-                            <td>${internship.internshipCoordinatorApproval}</td>
-                            <td><button id="download-pdf" class="btn btn-primary">Download Form <i class="fa fa-download"></i></button></td>
+                            <td class="text-center">${academicUnitApproval}</td>
+                            <td class="text-center">${facultyAdministratorApproval}</td>
+                            <td class="text-center">${internshipCoordinatorApproval}</td>
+                            <td>${downloadButton}</td>
                         `;
                         tableBody.appendChild(newRow);
+    
+                        // Add event listener for download button
+                        if (internship.status !== 'REJECT' && downloadButton) {
+                            const downloadBtn = newRow.querySelector('.download-btn');
+                            downloadBtn.addEventListener('click', () => {
+                                if (internship.status !== 'INSURANCE_ENTRY_DONE') {
+                                    alert('Your insurance entry has not been made yet.');
+                                } else {
+                                    // Proceed with the download
+                                    console.log('Downloading form...');
+                                }
+                            });
+                        }
                     });
                 } else {
                     console.error('Failed to fetch internships');
@@ -155,10 +204,12 @@
                 console.error('Error:', error);
             }
         }
-
+    
         // Load internships on page load
         window.onload = loadInternships;
     </script>
+    
+
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

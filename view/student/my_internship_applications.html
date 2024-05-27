@@ -156,10 +156,10 @@
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = 'WAITING';
                                 break;
-                            case 'WAITING_IN_INTERNSHIP_COORDINATOR':
+                            case 'ACCEPTED':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                internshipCoordinatorApproval = 'WAITING';
+                                internshipCoordinatorApproval = 'WAITING FOR INSURANCE ENTRY';
                                 break;
                             case 'INSURANCE_ENTRY_DONE':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
@@ -169,6 +169,8 @@
                                 break;
                             case 'REJECT':
                                 academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
+                                facultyAdministratorApproval= '<i class="bi bi-x-circle-fill text-danger"></i>';
+
                                 break;
                             default:
                                 downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';

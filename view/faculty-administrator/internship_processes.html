@@ -6,11 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Processes </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
         }
+        .accepted-icon {
+            color: green;
+            margin-right: 5px;
+        }
+
+
+        .accepted-icon {
+            color: green;
+            margin-right: 5px;
+
+        
+        }
+         .rejected-icon{
+            color: red;
+            margin-right: 5px;
+         }
 
         html,
         body {
@@ -45,7 +63,6 @@
                 <div class="dropdown">
                     <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px; " class="rounded-circle"
                         height="25" alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>
                 </div>
             </div>
         </div>
@@ -60,7 +77,7 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="internship_processes.html">Intership Processes</a>
+                    <a class="nav-link" href="internship_processes.html">Internship Processes</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="companies.html">Companies</a>
@@ -106,22 +123,8 @@
                                     <th>Faculty Administrator Approval</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Student name</td>
-                                    <td id="AcademicUnitApproval">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDisabled" disabled />
-                                        </div>
-                                    </td>
-                                    <td id="dekanApproval">
-                                        <a href="internship_application_approval.html">view application</a>
-                                    </td>
-                                </tr>
-
-
-                                <!-- Diğer satırlar buraya gelecek -->
+                            <tbody id="internshipTableBody">
+                                <!-- Dinamik içerik buraya eklenecek -->
                             </tbody>
                         </table>
                     </div>
@@ -130,48 +133,72 @@
         </div>
     </div>
 
-
     <script>
-        // Dekan onaylandığında
-        function approveByDean() {
-            localStorage.setItem("dekanOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
+        async function loadInternDetails() {
+            try {
+                const response = await fetch('http://localhost:3000/internship/details', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                        'Content-Type': 'application/json'
+                    }
+                });
 
-        // Bölüm Başkanı onaylandığında
-        function approveByDepartmentHead() {
-            localStorage.setItem("bolumBaskaniOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
 
-        // Staj Koordinatörlüğü onaylandığında
-        function approveByInternshipCoordinator() {
-            localStorage.setItem("stajKoordinatorluguOnay", "Onaylandı");
-            updateApprovalStatus();
-            window.close();
-        }
 
-        // Tabloyu güncelleyen fonksiyon
-        function updateApprovalStatus() {
-            var bolumBaskaniOnay = localStorage.getItem("bolumBaskaniOnay");
-            var dekanOnay = localStorage.getItem("dekanOnay");
-            var stajKoordinatorluguOnay = localStorage.getItem("stajKoordinatorluguOnay");
+                if (response.ok) {
+                    const internships = await response.json();
+                    const tableBody = document.getElementById('internshipTableBody');
+                    tableBody.innerHTML = '';
 
-            // Tüm yetkililer onayladıysa
-            if (bolumBaskaniOnay === "Onaylandı" && dekanOnay === "Onaylandı" && stajKoordinatorluguOnay === "Onaylandı") {
-                document.getElementById("bolumBaskaniApproval").innerText = "Onaylandı";
-                document.getElementById("bolumBaskaniApproval").classList.add("text-success");
-                document.getElementById("dekanApproval").innerText = "Onaylandı";
-                document.getElementById("dekanApproval").classList.add("text-success");
-                document.getElementById("stajKoordinatorluguApproval").innerText = "Onaylandı";
-                document.getElementById("stajKoordinatorluguApproval").classList.add("text-success");
+                    internships.forEach(async (internship) => {
+                        if (internship.status === 'WAITING_IN_DEAN' || internship.status === 'ACCEPTED') {
+                            approvalContentforDepartment = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
+                        }
+
+                        let approvalContentforDean = `<a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a>`; // eğer deparrtment onaylamışsa tik
+                        if (internship.status === 'ACCEPTED') {
+                            approvalContentforDean = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
+                        }
+                        if (internship.status === 'REJECT') {
+                            
+                            approvalContentforDean = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
+                        }
+
+                        const newRow = document.createElement('tr');
+                        newRow.innerHTML = `
+                            <td class="text-center">${internship.studentName}</td>
+                            <td class="text-center">${approvalContentforDepartment}</td>
+                            <td class="text-center">${approvalContentforDean}</td>
+                        `;
+                        tableBody.appendChild(newRow);
+                    });
+
+
+                } else {
+                    console.error('Failed to fetch student name');
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
         }
+        document.addEventListener('DOMContentLoaded', () => {
+            loadInternDetails();
 
-        // Sayfa yüklendiğinde tabloyu güncelle
-        window.onload = updateApprovalStatus;
+            document.getElementById('internshipTableBody').addEventListener('click', (event) => {
+                if (event.target.classList.contains('save-status-button')) {
+                    const reportId = event.target.getAttribute('data-report-id');
+                    const selectElement = document.querySelector(`.report-evaluation-select[data-report-id="${reportId}"]`);
+                    const status = selectElement.value;
+                    saveReportStatus(reportId, status);
+                } else if (event.target.classList.contains('update-status-button')) {
+                    const reportId = event.target.getAttribute('data-report-id');
+                    const selectElement = document.querySelector(`.report-evaluation-select[data-report-id="${reportId}"]`);
+                    const status = selectElement.value;
+                    updateReportStatus(reportId, status);
+                }
+            });
+        });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -183,7 +210,7 @@
             2024 © FMV Işık University - Center for Educational Technologies
         </div>
     </footer>
-    
+
 </body>
 
 </html>

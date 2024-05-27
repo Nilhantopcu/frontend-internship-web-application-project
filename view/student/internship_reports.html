@@ -130,15 +130,23 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('http://localhost:3000/internship', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
                 },
             });
+
+            if (response.status === 401) {
+                alert('Unauthorized access. Please sign in.');
+                return;
+            }
+
             const internships = await response.json();
             const tableBody = document.getElementById('internshipTableBody');
 
@@ -150,19 +158,25 @@
                         'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
                     },
                 });
+
+                if (reportsResponse.status === 401) {
+                    alert('Unauthorized access. Please sign in.');
+                    return;
+                }
+
                 const reports = await reportsResponse.json();
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${internship.internshipNumber}</td>
-                    <td>
-                        ${reports.length > 0 ?
+      <td>${internship.internshipNumber}</td>
+      <td>
+        ${reports.length > 0 ?
                         `<a href="http://localhost:3000/reports/download/${reports[0].Internship_Report}" target="_blank">${reports[0].Internship_Report}</a>
-                             <i class="fas fa-check approval-icon"></i>`
+          <i class="fas fa-check approval-icon"></i>`
                         : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
-                    </td>
-                    <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
-                `;
+      </td>
+      <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
+    `;
                 tableBody.appendChild(row);
             }
         });
@@ -173,17 +187,23 @@
             const formData = new FormData();
             formData.append('Internship_Report', fileInput.files[0]);
 
-            await fetch(`http://localhost:3000/reports/${internshipId}/upload`, {
+            const response = await fetch(`http://localhost:3000/reports/${internshipId}/upload`, {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'), // Eğer token kullanıyorsanız
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
                 },
                 body: formData,
             });
 
+            if (response.status === 401) {
+                alert('Unauthorized access. Please sign in.');
+                return;
+            }
+
             alert('Report uploaded successfully');
-            location.reload(); // Reload the page to update the table
+            location.reload();
         }
+
     </script>
 
 </body>

@@ -110,9 +110,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <script>
-
         async function loadInternDetails() {
             try {
                 const response = await fetch('http://localhost:3000/internship/details', {
@@ -127,7 +125,7 @@
                     const tableBody = document.getElementById('departmentInternshipTableBody');
                     tableBody.innerHTML = '';
 
-                    internships.forEach(async (internship) => {
+                    for (const internship of internships) {
                         let approvalContent = `<a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a>`;
                         if (internship.status === 'WAITING_IN_DEAN') {
                             approvalContent = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
@@ -136,6 +134,7 @@
                         let reportContent = '';
                         let reportEvaluationOptions = '';
                         let buttonContent = '';
+
                         if (internship.reports) {
                             const reportsResponse = await fetch(`http://localhost:3000/reports/${internship.id}`, {
                                 method: 'GET',
@@ -173,6 +172,21 @@
                             }
                         }
 
+                        let viewFormContent = '';
+                        const assessmentResponse = await fetch(`http://localhost:3000/assessment/${internship.id}`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        if (assessmentResponse.ok) {
+                            const assessments = await assessmentResponse.json();
+                            if (assessments.length > 0) {
+                                viewFormContent = `<a class="nav-link" href="view_form.html?id=${internship.id}">View Form</a>`;
+                            }
+                        }
+
                         const newRow = document.createElement('tr');
                         newRow.innerHTML = `
                             <td class="text-center">${internship.studentName}</td>
@@ -180,14 +194,14 @@
                             <td class="text-center">${reportContent}</td>
                             <td class="text-center">${reportEvaluationOptions}</td>
                             <td class="text-center">${buttonContent}</td>
-                            <td><a class="nav-link" href="view_form.html">View Form</a></td>
+                            <td class="text-center">${viewFormContent}</td>
                         `;
                         tableBody.appendChild(newRow);
-                    });
+                    }
 
                     filterRejectInternships();
                 } else {
-                    console.error('Failed to fetch student name');
+                    console.error('Failed to fetch internship details');
                 }
             } catch (error) {
                 console.error('Error:', error);
@@ -249,7 +263,6 @@
                 }
             });
         });
-
     </script>
 
 </body>

@@ -10,7 +10,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
         rel="stylesheet">
 
-
     <style>
         .approval-icon {
             width: 20px;
@@ -47,7 +46,7 @@
             <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="dropdown">
-                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px; " class="rounded-circle"
+                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px;" class="rounded-circle"
                         height="25" alt="Black and White Portrait of a Man" loading="lazy" />
                 </div>
             </div>
@@ -66,7 +65,7 @@
                     <a class="nav-link" href="internship_application.html">Internship Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internhsip Application
+                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internship Application
                         Form</a>
                 </li>
                 <li class="nav-item">
@@ -141,7 +140,7 @@
                     const tableBody = document.getElementById('internshipTableBody');
                     tableBody.innerHTML = ''; // Clear existing rows
 
-                    internships.forEach(internship => {
+                    internships.forEach(async internship => {
                         const newRow = document.createElement('tr');
                         let academicUnitApproval = '';
                         let facultyAdministratorApproval = '';
@@ -159,7 +158,11 @@
                             case 'WAITING_FOR_INSURANCE_ENTRY':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                internshipCoordinatorApproval = 'WAITING FOR INSURANCE ENTRY';
+                                downloadButton = 'Waiting for Insurance form';
+                                break;
+                            case 'INSURANCE_UPLOADED':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 break;
                             case 'INSURANCE_UPLOADED':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
@@ -177,18 +180,44 @@
                             //     internshipCoordinatorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                             //     downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
                             //     break;
+
                             case 'REJECT_FROM_DEPARTMENT':
                                 academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
-
                                 break;
                             case 'REJECT_FROM_DEAN':
+
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+
                                 facultyAdministratorApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
-
                                 break;
+                        }
 
-                            default:
-                                downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
-                                break;
+                        if (internship.insurance && internship.status !== 'WAITING_FOR_INSURANCE_ENTRY') {
+                            const insuranceResponse = await fetch(`http://localhost:3000/insurance/${internship.id}`, {
+                                method: 'GET',
+                                headers: {
+                                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                                    'Content-Type': 'application/json'
+                                }
+                            });
+
+                            if (insuranceResponse.ok) {
+                                const insurances = await insuranceResponse.json();
+                                if (insurances.length > 0) {
+                                    downloadButton = '';
+                                    insurances.forEach(insurance => {
+                                        const token = localStorage.getItem('accessToken');
+                                        downloadButton += `<a href="javascript:void(0)" onclick="downloadInsurance('${insurance.InsuranceForm}', '${token}')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"></path>
+                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"></path>
+                                        </svg>
+                                        </a>`;
+                                    });
+                                }
+                            } else {
+                                console.error('Failed to fetch insurances', insuranceResponse.statusText);
+                            }
                         }
 
                         newRow.innerHTML = `
@@ -198,19 +227,6 @@
                             <td>${downloadButton}</td>
                         `;
                         tableBody.appendChild(newRow);
-
-                        // Add event listener for download button
-                        if (internship.status !== 'REJECT' && downloadButton) {
-                            const downloadBtn = newRow.querySelector('.download-btn');
-                            downloadBtn.addEventListener('click', () => {
-                                if (internship.status !== 'INSURANCE_ENTRY_DONE') {
-                                    alert('Your insurance entry has not been made yet.');
-                                } else {
-                                    // Proceed with the download
-                                    console.log('Downloading form...');
-                                }
-                            });
-                        }
                     });
                 } else {
                     console.error('Failed to fetch internships');
@@ -220,11 +236,35 @@
             }
         }
 
+        async function downloadInsurance(filename, token) {
+            try {
+                const response = await fetch('http://localhost:3000/insurance/download/' + filename, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                    }
+                });
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
+        }
+
         // Load internships on page load
         window.onload = loadInternships;
     </script>
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

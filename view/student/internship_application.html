@@ -48,7 +48,7 @@
                     <a class="nav-link" href="internship_application.html">Internship Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internhsip Application
+                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internship Application
                         Form</a>
                 </li>
                 <li class="nav-item">
@@ -95,10 +95,7 @@
                                 <input list="companyNames" class="form-control" id="companyName"
                                     aria-describedby="companyName">
                                 <datalist id="companyNames">
-                                    <option value="Company A">
-                                    <option value="Company B">
-                                    <option value="Company C">
-                                        <!-- Daha fazla seçenek eklenebilir -->
+                                    <!-- Dinamik olarak eklenecek -->
                                 </datalist>
                             </div>
                         </div>
@@ -107,10 +104,7 @@
                                 <label for="departmentName" class="form-label">Department Name</label>
                                 <input list="departmentNames" class="form-control" id="departmentName">
                                 <datalist id="departmentNames">
-                                    <option value="Department A">
-                                    <option value="Department B">
-                                    <option value="Department C">
-                                        <!-- Daha fazla seçenek eklenebilir -->
+                                    <!-- Dinamik olarak eklenecek -->
                                 </datalist>
                             </div>
                         </div>
@@ -210,7 +204,7 @@
                                 <label for="startDate" style="padding-bottom: 10px; font-weight: bold;">Internship Start
                                     Date:</label>
                                 <div class="input-group date" id="start_datepicker">
-                                    <input type="text" class="form-control" id="startDate" placeholder="dd-mm-yyyy">
+                                    <input type="text" class="form-control" id="startDate" placeholder="dd/mm/yyyy">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white">
                                             <i class="fa fa-calendar"></i>
@@ -224,7 +218,7 @@
                                 <label for="finishDate" style="padding-bottom: 10px; font-weight: bold;">Internship
                                     Finish Date:</label>
                                 <div class="input-group date" id="finish_datepicker">
-                                    <input type="text" class="form-control" id="finishDate" placeholder="dd-mm-yyyy">
+                                    <input type="text" class="form-control" id="finishDate" placeholder="dd/mm/yyyy">
                                     <span class="input-group-append">
                                         <span class="input-group-text bg-white">
                                             <i class="fa fa-calendar"></i>
@@ -255,19 +249,53 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <script type="text/javascript">
+        // $(function () {
+        //     var minDate = new Date();
+        //     minDate.setDate(minDate.getDate());
+
+        //     $('#start_datepicker').datepicker({
+        //         format: 'dd-mm-yyyy',
+        //         startDate: minDate,
+        //         todayHighlight: true,
+        //         autoclose: true
+        //     });
+
+        //     $('#finish_datepicker').datepicker({
+        //         format: 'dd-mm-yyyy',
+        //         startDate: minDate,
+        //         todayHighlight: true,
+        //         autoclose: true
+        //     });
+
+        //     $('#datepicker').datepicker({
+        //         multidate: true,
+        //         format: 'dd-mm-yyyy',
+        //         startDate: minDate,
+        //     });
+        // });
+
+
         $(function () {
             var minDate = new Date();
-            minDate.setDate(minDate.getDate());
+            minDate.setDate(minDate.getDate() + 15); // Bugünden 15 gün sonrası
 
             $('#start_datepicker').datepicker({
-                format: 'dd-mm-yyyy',
+                format: 'dd/mm/yyyy',
                 startDate: minDate,
                 todayHighlight: true,
                 autoclose: true
+            }).on('changeDate', function (e) {
+                var selectedDate = e.date;
+                if (selectedDate < minDate) {
+                    alert('En erken 15 gün sonrayı seçebilirsiniz');
+                    $('#startDate').val('');
+                } else {
+                    $('#datepicker').datepicker('setDate', selectedDate);
+                }
             });
 
             $('#finish_datepicker').datepicker({
-                format: 'dd-mm-yyyy',
+                format: 'dd/mm/yyyy',
                 startDate: minDate,
                 todayHighlight: true,
                 autoclose: true
@@ -275,9 +303,53 @@
 
             $('#datepicker').datepicker({
                 multidate: true,
-                format: 'dd-mm-yyyy',
-                startDate: minDate,
+                format: 'dd/mm/yyyy',
+                startDate: minDate
+            }).on('changeDate', function (e) {
+                var dates = $(this).datepicker('getDates');
+                if (dates.length > 0) {
+                    var startDate = $('#startDate').datepicker('getDate');
+                    if (!startDate || startDate.toDateString() !== dates[0].toDateString()) {
+                        $('#startDate').datepicker('setDate', dates[0]);
+                    }
+                    if (dates.length === 20) {
+                        $('#finishDate').datepicker('setDate', dates[19]);
+                    }
+                }
             });
+
+            // Dinamik olarak company names ve department names doldurulması
+            async function loadCompanyAndDepartmentNames() {
+                try {
+                    const companyResponse = await fetch('http://localhost:3000/company/getAll');
+                    const departmentResponse = await fetch('http://localhost:3000/department/getAll');
+
+                    if (companyResponse.ok && departmentResponse.ok) {
+                        const companies = await companyResponse.json();
+                        const departments = await departmentResponse.json();
+
+                        const companyDatalist = document.getElementById('companyNames');
+                        companies.forEach(company => {
+                            const option = document.createElement('option');
+                            option.value = company.name;
+                            companyDatalist.appendChild(option);
+                        });
+
+                        const departmentDatalist = document.getElementById('departmentNames');
+                        departments.forEach(department => {
+                            const option = document.createElement('option');
+                            option.value = department.name;
+                            departmentDatalist.appendChild(option);
+                        });
+                    } else {
+                        console.error('Failed to fetch company or department data');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            loadCompanyAndDepartmentNames();
         });
 
         document.getElementById('companyName').addEventListener('input', async function () {
@@ -417,6 +489,7 @@
 
         });
     </script>
+
 
 </body>
 

@@ -133,10 +133,10 @@
 
                     for (const internship of internships) {
                         let approvalContent = `<a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a>`;
-                        if (internship.status === 'WAITING_IN_DEAN' || internship.status === 'ACCEPTED'){
+                        if (internship.status === 'WAITING_IN_DEAN' || internship.status === 'WAITING_FOR_INSURANCE_ENTRY' || internship.status === 'INSURANCE_UPLOADED' || internship.status === 'COMPLETED'){ //internship.status === 'ACCEPTED' olamamalı
                             approvalContent = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
                         }
-                        if (internship.status === 'REJECT' ){
+                        if (internship.status === 'REJECT_FROM_DEPARTMENT' ){
                             approvalContent = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
                         }
 

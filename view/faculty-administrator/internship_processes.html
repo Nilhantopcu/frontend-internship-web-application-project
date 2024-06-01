@@ -7,28 +7,27 @@
     <title>Internship Processes </title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
         }
-        .accepted-icon {
-            color: green;
-            margin-right: 5px;
-        }
+
 
 
         .accepted-icon {
             color: green;
             margin-right: 5px;
 
-        
+
         }
-         .rejected-icon{
+
+        .rejected-icon {
             color: red;
             margin-right: 5px;
-         }
+        }
 
         html,
         body {
@@ -149,31 +148,31 @@
                 if (response.ok) {
                     const internships = await response.json();
                     const tableBody = document.getElementById('internshipTableBody');
+
                     tableBody.innerHTML = '';
 
-                    internships.forEach(async (internship) => {
-                        if (internship.status === 'WAITING_IN_DEAN' || internship.status === 'ACCEPTED') {
-                            approvalContentforDepartment = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
-                        }
+                    internships.filter(internship => internship.status !== 'REJECT_FROM_DEPARTMENT' && internship.status !== 'WAITING_IN_DEPARTMENT_HEAD') // reject olanları filtrele
+                        .forEach(async (internship) => {
+                            if (internship.status === 'WAITING_IN_DEAN') {
+                                let approvalContentforDepartment = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
 
-                        let approvalContentforDean = `<a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a>`; // eğer deparrtment onaylamışsa tik
-                        if (internship.status === 'ACCEPTED') {
-                            approvalContentforDean = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
-                        }
-                        if (internship.status === 'REJECT') {
-                            
-                            approvalContentforDean = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
-                        }
+                                let approvalContentforDean = `<a class="nav-link" href="internship_application_approval.html?id=${internship.id}">View Application</a>`;
+                                if (internship.status === 'WAITING_FOR_INSURANCE_ENTRY') {
+                                    let approvalContentforDean = `<i class="bi bi-check-circle-fill accepted-icon"></i> Accepted`;
 
-                        const newRow = document.createElement('tr');
-                        newRow.innerHTML = `
-                            <td class="text-center">${internship.studentName}</td>
-                            <td class="text-center">${approvalContentforDepartment}</td>
-                            <td class="text-center">${approvalContentforDean}</td>
-                        `;
-                        tableBody.appendChild(newRow);
-                    });
+                                } if (internship.status === 'REJECT_FROM_DEAN') {
+                                    approvalContentforDean = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
+                                }
+                                const newRow = document.createElement('tr');
+                                newRow.innerHTML = `
+                                <td class="text-center">${internship.studentName}</td>
+                                <td class="text-center">${approvalContentforDepartment}</td>
+                                <td class="text-center">${approvalContentforDean}</td>
+                            `;
+                                tableBody.appendChild(newRow);
+                            }
 
+                        });
 
                 } else {
                     console.error('Failed to fetch student name');
@@ -182,6 +181,10 @@
                 console.error('Error:', error);
             }
         }
+
+
+        
+
         document.addEventListener('DOMContentLoaded', () => {
             loadInternDetails();
 

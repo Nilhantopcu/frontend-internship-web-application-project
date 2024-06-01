@@ -160,6 +160,9 @@
                             academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                             facultyAdministratorApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
                         }
+                        if(internship.status === 'INSURANCE_UPLOADED'){
+                            insuranceEntryDocument = 'INSURANCE UPLOADED';
+                        }
 
                         const newRow = document.createElement('tr');
                         newRow.innerHTML = `

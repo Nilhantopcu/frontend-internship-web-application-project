@@ -7,7 +7,8 @@
     <title>My Internship Applications</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
 
 
     <style>
@@ -109,7 +110,6 @@
                         <th>Internship Application</th>
                         <th>Academic Unit Approval </th>
                         <th>Faculty Administrator Approval</th>
-                        <th>Internship Coordinator Approval</th>
                         <th>Insurance Entry Document</th>
                     </tr>
                 </thead>
@@ -140,14 +140,14 @@
                     const internships = await response.json();
                     const tableBody = document.getElementById('internshipTableBody');
                     tableBody.innerHTML = ''; // Clear existing rows
-    
+
                     internships.forEach(internship => {
                         const newRow = document.createElement('tr');
                         let academicUnitApproval = '';
                         let facultyAdministratorApproval = '';
                         let internshipCoordinatorApproval = '';
                         let downloadButton = '';
-    
+
                         switch (internship.status) {
                             case 'WAITING_IN_DEPARTMENT_HEAD':
                                 academicUnitApproval = 'WAITING';
@@ -156,36 +156,39 @@
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = 'WAITING';
                                 break;
-                            case 'ACCEPTED':
+                            case 'WAITING_FOR_INSURANCE_ENTRY':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 internshipCoordinatorApproval = 'WAITING FOR INSURANCE ENTRY';
                                 break;
-                            case 'INSURANCE_ENTRY_DONE':
-                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                internshipCoordinatorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
-                                break;
-                            case 'REJECT':
+                            // case 'INSURANCE_ENTRY_DONE':
+                            //     academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                            //     facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                            //     internshipCoordinatorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                            //     downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
+                            //     break;
+                            case 'REJECT_FROM_DEPARTMENT':
                                 academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
-                                facultyAdministratorApproval= '<i class="bi bi-x-circle-fill text-danger"></i>';
 
                                 break;
+                                case 'REJECT_FROM_DEAN':
+                                facultyAdministratorApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
+
+                                break;
+
                             default:
                                 downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
                                 break;
                         }
-    
+
                         newRow.innerHTML = `
                             <td>${internship.internshipNumber}</td>
                             <td class="text-center">${academicUnitApproval}</td>
                             <td class="text-center">${facultyAdministratorApproval}</td>
-                            <td class="text-center">${internshipCoordinatorApproval}</td>
                             <td>${downloadButton}</td>
                         `;
                         tableBody.appendChild(newRow);
-    
+
                         // Add event listener for download button
                         if (internship.status !== 'REJECT' && downloadButton) {
                             const downloadBtn = newRow.querySelector('.download-btn');
@@ -206,11 +209,11 @@
                 console.error('Error:', error);
             }
         }
-    
+
         // Load internships on page load
         window.onload = loadInternships;
     </script>
-    
+
 
 
 

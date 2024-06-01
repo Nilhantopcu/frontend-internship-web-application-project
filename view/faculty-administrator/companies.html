@@ -121,8 +121,7 @@
                 }
 
                 const internships = await response.json();
-
-                internships.forEach((internship, index) => {
+                internships.filter(internship => internship.status === 'INSURANCE_UPLOADED' || internship.status === 'COMPLETED').forEach(async (internship, index) => {
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
@@ -134,9 +133,10 @@
                 <td>${internship.notes || ''}</td>
                 
             `;
+            internshipTableBody.appendChild(row);
 
-                    internshipTableBody.appendChild(row);
                 });
+
             } catch (error) {
                 console.error('Error fetching internships:', error);
             }

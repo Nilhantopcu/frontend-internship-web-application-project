@@ -65,7 +65,8 @@
                     <a class="nav-link" href="internship_application.html">Internship Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internship Application Form</a>
+                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internship Application
+                        Form</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="my_internship_applications.html">My Internship Applications</a>
@@ -144,7 +145,7 @@
                         let academicUnitApproval = '';
                         let facultyAdministratorApproval = '';
                         let internshipCoordinatorApproval = '';
-                        let downloadButton = 'Waiting for Insurance form';
+                        let downloadButton = '';
 
                         switch (internship.status) {
                             case 'WAITING_IN_DEPARTMENT_HEAD':
@@ -157,7 +158,7 @@
                             case 'WAITING_FOR_INSURANCE_ENTRY':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                                internshipCoordinatorApproval = 'WAITING FOR INSURANCE ENTRY';
+                                downloadButton = 'Waiting for Insurance form';
                                 break;
                             case 'INSURANCE_UPLOADED':
                                 academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
@@ -167,11 +168,12 @@
                                 academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
                                 break;
                             case 'REJECT_FROM_DEAN':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 facultyAdministratorApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
                                 break;
                         }
 
-                        if (internship.insurance) {
+                        if (internship.insurance && internship.status !== 'WAITING_FOR_INSURANCE_ENTRY') {
                             const insuranceResponse = await fetch(`http://localhost:3000/insurance/${internship.id}`, {
                                 method: 'GET',
                                 headers: {
@@ -244,6 +246,7 @@
         // Load internships on page load
         window.onload = loadInternships;
     </script>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

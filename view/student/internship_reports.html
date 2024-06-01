@@ -145,7 +145,7 @@
             const tableBody = document.getElementById('internshipTableBody');
 
             for (const internship of internships) {
-                if (internship.status !== 'REJECT_FROM_DEPARTMENT' || 'REJECT_FROM_DEAN') {
+                if (internship.status !== 'REJECT_FROM_DEPARTMENT' && internship.status !== 'REJECT_FROM_DEAN') {
                     const reportsResponse = await fetch(`http://localhost:3000/reports/${internship.id}`, {
                         method: 'GET',
                         headers: {
@@ -166,9 +166,9 @@
                         <td>${internship.internshipNumber}</td>
                         <td>
                             ${reports.length > 0 ?
-                                `<a href="javascript:void(0)" onclick="downloadReport('${reports[0].Internship_Report}', '${localStorage.getItem('accessToken')}')">${reports[0].Internship_Report}</a>
-                                <i class="fas fa-check approval-icon"></i>` 
-                                : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
+                            `<a href="javascript:void(0)" onclick="downloadReport('${reports[0].Internship_Report}', '${localStorage.getItem('accessToken')}')">${reports[0].Internship_Report}</a>
+                                <i class="fas fa-check approval-icon"></i>`
+                            : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
                         </td>
                         <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
                     `;

@@ -1,55 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Processes</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <style>
         .approval-icon {
             width: 20px;
             height: 20px;
         }
+
         .accepted-icon {
             color: green;
             margin-right: 5px;
         }
+
         .rejected-icon {
             color: red;
             margin-right: 5px;
         }
-        html, body {
+
+        html,
+        body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
         }
+
         .content {
             flex: 1;
         }
+
         .bg-body-tertiary {
             background-color: #f8f9fa !important;
         }
     </style>
 </head>
+
 <body>
     <!-- TOP Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;" src="/public/image/logo.png" alt="logo" class="logo-default">
+                <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
+                    src="/public/image/logo.png" alt="logo" class="logo-default">
             </div>
             <div class="d-flex align-items-center">
                 <div class="dropdown">
-                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px;" class="rounded-circle" height="25" alt="Black and White Portrait of a Man" loading="lazy" />
+                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px;" class="rounded-circle"
+                        height="25" alt="Black and White Portrait of a Man" loading="lazy" />
                 </div>
             </div>
         </div>
     </nav>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #b5e0ff;">
         <a class="navbar-brand" href="home.html" style="padding-left: 50px;">Home Page</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarColor03">
@@ -66,8 +78,11 @@
             <li class="nav-item me-3 me-lg-0">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
-                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"></path>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-bell" viewBox="0 0 16 16">
+                            <path
+                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
+                            </path>
                         </svg>
                     </button>
                 </div>
@@ -85,13 +100,16 @@
         <div class="container mb-4">
             <div class="row">
                 <div class="col text-center">
-                    <button class="btn btn-outline-primary btn-block" onclick="filterInternships('WAITING_FOR_INSURANCE_ENTRY')">Waiting for Insurance Entry</button>
+                    <button class="btn btn-outline-primary btn-block"
+                        onclick="filterInternships('WAITING_FOR_INSURANCE_ENTRY')">Waiting for Insurance Entry</button>
                 </div>
                 <div class="col text-center">
-                    <button class="btn btn-outline-primary btn-block" onclick="filterInternships('INSURANCE_UPLOADED')">Insurance Uploaded</button>
+                    <button class="btn btn-outline-primary btn-block"
+                        onclick="filterInternships('INSURANCE_UPLOADED')">Insurance Uploaded</button>
                 </div>
                 <div class="col text-center">
-                    <button class="btn btn-outline-primary btn-block" onclick="filterInternships('COMPLETED')">Internship Completed</button>
+                    <button class="btn btn-outline-primary btn-block"
+                        onclick="filterInternships('COMPLETED')">Internship Completed</button>
                 </div>
             </div>
         </div>
@@ -114,6 +132,81 @@
         </div>
     </div>
 
+<!-- 
+    <script>async function loadInternDetails(filter = '') {
+        try {
+            const response = await fetch('http://localhost:3000/internship/details', {
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (response.ok) {
+                const internships = await response.json();
+                const tableBody = document.getElementById('internshipTableBodyForCoordinator');
+                tableBody.innerHTML = '';
+    
+                internships.forEach(internship => {
+                    let academicUnitApproval = '';
+                    let facultyAdministratorApproval = '';
+                    let insuranceEntryDocument = '';
+    
+                    if (filter && internship.status !== filter) {
+                        return;
+                    }
+                    if (internship.status === 'WAITING_FOR_INSURANCE_ENTRY') {
+                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                        insuranceEntryDocument = `<form id="upload-form-${internship.id}" enctype="multipart/form-data">
+                            <input type="file" name="InsuranceForm" accept="application/pdf" />
+                            <button type="button" class="btn btn-primary" onclick="uploadInsurance('${internship.id}')">Upload</button>
+                        </form>`;
+                    } else if (internship.status === 'INSURANCE_UPLOADED') {
+                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                    } else if (internship.status === 'COMPLETED') {
+                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                    }
+                    if (internship.status === 'REJECT_FROM_DEPARTMENT') {
+                        academicUnitApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
+                        facultyAdministratorApproval = `INVALID`;
+                    }
+                    if (internship.status === 'REJECT_FROM_DEAN') {
+                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                        facultyAdministratorApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
+                    }
+                    if (internship.status === 'INSURANCE_UPLOADED') {
+                        insuranceEntryDocument = 'INSURANCE UPLOADED';
+                    }
+    
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td>${internship.studentName}</td>
+                        <td class="text-center">${academicUnitApproval}</td>
+                        <td class="text-center">${facultyAdministratorApproval}</td>
+                        <td>${internship.startDate}</td>
+                        <td>${internship.finishDate}</td>
+                        <td class="text-center">${insuranceEntryDocument}</td>
+                    `;
+                    tableBody.appendChild(newRow);
+                });
+            } else {
+                console.error('Failed to fetch internship details');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    
+    function filterInternships(status) {
+        loadInternDetails(status);
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => loadInternDetails());
+    </script> -->
     <script>
         async function loadInternDetails(filter = '') {
             try {
@@ -160,7 +253,7 @@
                             academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                             facultyAdministratorApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
                         }
-                        if(internship.status === 'INSURANCE_UPLOADED'){
+                        if (internship.status === 'INSURANCE_UPLOADED') {
                             insuranceEntryDocument = 'INSURANCE UPLOADED';
                         }
 
@@ -181,6 +274,9 @@
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+        function filterInternships(status) {
+            loadInternDetails(status);
         }
 
         async function uploadInsurance(internshipId) {
@@ -207,9 +303,9 @@
             }
         }
 
-        function filterInternships(status) {
-            loadInternDetails(status);
-        }
+        // function filterInternships(status) {
+        //     loadInternDetails(status);
+        // }
 
         document.addEventListener('DOMContentLoaded', () => loadInternDetails());
     </script>
@@ -220,8 +316,9 @@
 
     <footer class="bg-body-tertiary text-center text-lg-start">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-            2024 © FMV Işık University - Center for Educational Technologies
+            2024 © FMV Işık University - Şule İlkbahar / Nilhan Topçu
         </div>
     </footer>
 </body>
+
 </html>

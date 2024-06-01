@@ -161,6 +161,16 @@
                                 facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                                 internshipCoordinatorApproval = 'WAITING FOR INSURANCE ENTRY';
                                 break;
+                            case 'INSURANCE_UPLOADED':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                downloadButton = '<button class="btn btn-primary download-btn">Download Form <i class="bi bi-download"></i></button>';
+                                break;
+                            case 'COMPLETED':
+                                academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
+                                break;
+
                             // case 'INSURANCE_ENTRY_DONE':
                             //     academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                             //     facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
@@ -171,7 +181,7 @@
                                 academicUnitApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
 
                                 break;
-                                case 'REJECT_FROM_DEAN':
+                            case 'REJECT_FROM_DEAN':
                                 facultyAdministratorApproval = '<i class="bi bi-x-circle-fill text-danger"></i>';
 
                                 break;

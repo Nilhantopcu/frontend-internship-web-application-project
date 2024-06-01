@@ -7,7 +7,6 @@
     <title>Internship Reports</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <!-- Added FontAwesome -->
     <style>
         .approval-icon {
             width: 20px;
@@ -38,7 +37,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary">
         <!-- Container wrapper -->
         <div class="container-fluid">
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <img style="margin: 0px; width: 270px !important; margin: 5px !important; margin-left: 0px !important;"
                     src="/public/image/logo.png" alt="logo" class="logo-default">
@@ -46,9 +44,8 @@
             <div class="d-flex align-items-center">
                 <!-- Avatar -->
                 <div class="dropdown">
-                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px; " class="rounded-circle"
+                    <img src="/public/image/user.png" style="scale: 2.5; margin-right: 15px;" class="rounded-circle"
                         height="25" alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>
                 </div>
             </div>
         </div>
@@ -66,12 +63,11 @@
                     <a class="nav-link" href="internship_application.html">Internship Application</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internhsip Application
+                    <a class="nav-link" href="upload_intership_application_form.html">Upload Internship Application
                         Form</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="my_internship_applications.html">My Intership Applications</a>
-
+                    <a class="nav-link" href="my_internship_applications.html">My Internship Applications</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="internship_reports.html">Internship Reports</a>
@@ -83,14 +79,13 @@
         <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
             <li class="nav-item me-3 me-lg-0">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-primary" fdprocessedid="tq5f4">
+                    <button type="button" class="btn btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-bell" viewBox="0 0 16 16">
                             <path
                                 d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
                             </path>
                         </svg>
-
                     </button>
                 </div>
             </li>
@@ -131,7 +126,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('http://localhost:3000/internship', {
@@ -151,7 +145,7 @@
             const tableBody = document.getElementById('internshipTableBody');
 
             for (const internship of internships) {
-                if (internship.status !== 'REJECT') {
+                if (internship.status !== 'REJECT_FROM_DEPARTMENT' || 'REJECT_FROM_DEAN') {
                     const reportsResponse = await fetch(`http://localhost:3000/reports/${internship.id}`, {
                         method: 'GET',
                         headers: {
@@ -169,14 +163,14 @@
 
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                    <td>${internship.internshipNumber}</td>
-                    <td>
-                        ${reports.length > 0 ?
-                                            `<a href="http://localhost:3000/reports/download/${reports[0].Internship_Report}" target="_blank">${reports[0].Internship_Report}</a>
-                        <i class="fas fa-check approval-icon"></i>`
-                                            : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
-                    </td>
-                    <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
+                        <td>${internship.internshipNumber}</td>
+                        <td>
+                            ${reports.length > 0 ?
+                                `<a href="javascript:void(0)" onclick="downloadReport('${reports[0].Internship_Report}', '${localStorage.getItem('accessToken')}')">${reports[0].Internship_Report}</a>
+                                <i class="fas fa-check approval-icon"></i>` 
+                                : `<input class="form-control" type="file" data-internship-id="${internship.id}" onchange="uploadReport(event)">`}
+                        </td>
+                        <td>${reports.length > 0 ? reports[0].Evaluation : 'No report uploaded'}</td>
                     `;
                     tableBody.appendChild(row);
                 }
@@ -204,6 +198,33 @@
 
             alert('Report uploaded successfully');
             location.reload();
+        }
+
+        async function downloadReport(filename, token) {
+            try {
+                const response = await fetch(`http://localhost:3000/reports/download/${filename}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token,
+                    }
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    throw new Error('Network response was not ok.');
+                }
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+            }
         }
 
     </script>

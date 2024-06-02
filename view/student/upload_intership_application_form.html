@@ -6,6 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internship Application Step 3</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        footer {
+            background-color: rgba(0, 0, 0, 0.05);
+            text-align: center;
+            padding: 3px;
+            margin-top: auto; /* Footer'ın en altta kalmasını sağlar */
+        }
+
+    </style>
+
 </head>
 
 <body>
@@ -50,75 +77,71 @@
             </ul>
         </div>
 
-        <!-- Notification and Logout -->
         <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
-            <li class="nav-item me-3 me-lg-0">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="bi bi-bell" viewBox="0 0 16 16">
-                            <path
-                                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6">
-                            </path>
-                        </svg>
-                    </button>
-                </div>
-            </li>
             <li class="nav-item" style="padding-left: 20px;">
                 <a class="nav-link" href="/view/login.html">Log Out</a>
             </li>
         </ul>
     </nav>
-    <div class="container" style="margin-top: 30px;">
-        <div class="card">
-            <div class="card-header" style="color:#007bff;">
-                INTERNSHIP APPLICATION FORM - STEP 3
-            </div>
-            <div class="container my-5">
-                <div class="row" style="margin-bottom: 30px;">
-                    <div class="col-md-6">
-                        <p>Internship Application Form:</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="internshipApplicationForm">
+    <div class="wrapper">
+        <div class="container content" style="margin-top: 30px;">
+            <div class="card">
+                <div class="card-header" style="color:#007bff;">
+                    INTERNSHIP APPLICATION FORM - STEP 3
+                </div>
+                <div class="container my-5">
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-md-6">
+                            <p>Internship Application Form:</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="internshipApplicationForm">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-bottom: 30px;">
-                    <div class="col-md-6">
-                        <p>Employer Information Form:</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="employerInformationForm">
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-md-6">
+                            <p>Employer Information Form:</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="employerInformationForm">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-bottom: 30px;">
-                    <div class="col-md-6">
-                        <p>Declaration and Commitment Document:</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="declarationCommitmentDocument">
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-md-6">
+                            <p>Declaration and Commitment Document:</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="declarationCommitmentDocument">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row" style="margin-bottom: 30px;">
-                    <div class="col-md-6">
-                        <p>ID Card Photocopy (in PDF):</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="idCardPhotocopy">
+                    <div class="row" style="margin-bottom: 30px;">
+                        <div class="col-md-6">
+                            <p>ID Card Photocopy (in PDF):</p>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input class="form-control" type="file" id="idCardPhotocopy">
+                            </div>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary" id="nextButton">Upload All Forms</button>
                 </div>
-                <button type="submit" class="btn btn-primary" id="nextButton">Upload All Forms</button>
             </div>
         </div>
+
+        <footer class="bg-light text-center text-lg-start">
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+                2024 © FMV Işık University - Sule İlkbahar & Nilhan Topçu
+            </div>
+        </footer>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 

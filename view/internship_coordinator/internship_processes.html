@@ -39,6 +39,14 @@
         .bg-body-tertiary {
             background-color: #f8f9fa !important;
         }
+
+        .btn-view-forms {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
     </style>
 </head>
 
@@ -122,6 +130,7 @@
                         <th>Faculty Administrator Approval</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Internship Forms</th>
                         <th>Insurance Entry Document</th>
                     </tr>
                 </thead>
@@ -131,82 +140,6 @@
             </table>
         </div>
     </div>
-
-<!-- 
-    <script>async function loadInternDetails(filter = '') {
-        try {
-            const response = await fetch('http://localhost:3000/internship/details', {
-                method: 'GET',
-                headers: {
-                    'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            if (response.ok) {
-                const internships = await response.json();
-                const tableBody = document.getElementById('internshipTableBodyForCoordinator');
-                tableBody.innerHTML = '';
-    
-                internships.forEach(internship => {
-                    let academicUnitApproval = '';
-                    let facultyAdministratorApproval = '';
-                    let insuranceEntryDocument = '';
-    
-                    if (filter && internship.status !== filter) {
-                        return;
-                    }
-                    if (internship.status === 'WAITING_FOR_INSURANCE_ENTRY') {
-                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                        insuranceEntryDocument = `<form id="upload-form-${internship.id}" enctype="multipart/form-data">
-                            <input type="file" name="InsuranceForm" accept="application/pdf" />
-                            <button type="button" class="btn btn-primary" onclick="uploadInsurance('${internship.id}')">Upload</button>
-                        </form>`;
-                    } else if (internship.status === 'INSURANCE_UPLOADED') {
-                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                    } else if (internship.status === 'COMPLETED') {
-                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                        facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                    }
-                    if (internship.status === 'REJECT_FROM_DEPARTMENT') {
-                        academicUnitApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
-                        facultyAdministratorApproval = `INVALID`;
-                    }
-                    if (internship.status === 'REJECT_FROM_DEAN') {
-                        academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
-                        facultyAdministratorApproval = `<i class="bi bi-x-circle-fill text-danger"></i> Rejected`;
-                    }
-                    if (internship.status === 'INSURANCE_UPLOADED') {
-                        insuranceEntryDocument = 'INSURANCE UPLOADED';
-                    }
-    
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td>${internship.studentName}</td>
-                        <td class="text-center">${academicUnitApproval}</td>
-                        <td class="text-center">${facultyAdministratorApproval}</td>
-                        <td>${internship.startDate}</td>
-                        <td>${internship.finishDate}</td>
-                        <td class="text-center">${insuranceEntryDocument}</td>
-                    `;
-                    tableBody.appendChild(newRow);
-                });
-            } else {
-                console.error('Failed to fetch internship details');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-    
-    function filterInternships(status) {
-        loadInternDetails(status);
-    }
-    
-    document.addEventListener('DOMContentLoaded', () => loadInternDetails());
-    </script> -->
     <script>
         async function loadInternDetails(filter = '') {
             try {
@@ -223,14 +156,16 @@
                     const tableBody = document.getElementById('internshipTableBodyForCoordinator');
                     tableBody.innerHTML = '';
 
-                    internships.forEach(internship => {
+                    for (const internship of internships) {
                         let academicUnitApproval = '';
                         let facultyAdministratorApproval = '';
                         let insuranceEntryDocument = '';
+                        let internshipForms = '';
 
                         if (filter && internship.status !== filter) {
-                            return;
+                            continue;
                         }
+
                         if (internship.status === 'WAITING_FOR_INSURANCE_ENTRY') {
                             academicUnitApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
                             facultyAdministratorApproval = '<i class="bi bi-check-circle-fill text-success"></i>';
@@ -257,6 +192,22 @@
                             insuranceEntryDocument = 'INSURANCE UPLOADED';
                         }
 
+                        // Formlar yüklendiyse View Forms butonunu göster
+                        const filesResponse = await fetch(`http://localhost:3000/files/${internship.id}/uploaded`, {
+                            method: 'GET',
+                            headers: {
+                                'Authorization': 'Bearer ' + localStorage.getItem('accessToken'),
+                                'Content-Type': 'application/json'
+                            }
+                        });
+
+                        if (filesResponse.ok) {
+                            const files = await filesResponse.json();
+                            if (files.Internship_Application_Form || files.Employer_Information_Form || files.Declaration_Commitment_Document || files.ID_Card_Photocopy) {
+                                internshipForms = `<button class="btn btn-view-forms" onclick="viewForms('${internship.id}')">View Forms</button>`;
+                            }
+                        }
+
                         const newRow = document.createElement('tr');
                         newRow.innerHTML = `
                             <td>${internship.studentName}</td>
@@ -264,10 +215,11 @@
                             <td class="text-center">${facultyAdministratorApproval}</td>
                             <td>${internship.startDate}</td>
                             <td>${internship.finishDate}</td>
+                            <td class="text-center">${internshipForms}</td>
                             <td class="text-center">${insuranceEntryDocument}</td>
                         `;
                         tableBody.appendChild(newRow);
-                    });
+                    }
                 } else {
                     console.error('Failed to fetch internship details');
                 }
@@ -275,6 +227,7 @@
                 console.error('Error:', error);
             }
         }
+
         function filterInternships(status) {
             loadInternDetails(status);
         }
@@ -303,9 +256,9 @@
             }
         }
 
-        // function filterInternships(status) {
-        //     loadInternDetails(status);
-        // }
+        function viewForms(internshipId) {
+            window.location.href = `view_forms.html?internshipId=${internshipId}`;
+        }
 
         document.addEventListener('DOMContentLoaded', () => loadInternDetails());
     </script>
@@ -316,7 +269,7 @@
 
     <footer class="bg-body-tertiary text-center text-lg-start">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-            2024 © FMV Işık University - Şule İlkbahar / Nilhan Topçu
+            2024 © FMV Işık University - Sule İlkbahar & Nilhan Topçu
         </div>
     </footer>
 </body>

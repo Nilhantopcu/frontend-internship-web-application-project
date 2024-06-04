@@ -60,7 +60,6 @@
             </ul>
         </div>
 
-        <!--Notification-->
         <ul class="navbar-nav d-flex flex-row me-1" style="padding-right: 50px;">
             <li class="nav-item" style="padding-left: 20px;">
                 <a class="nav-link" href="/view/login.html">Log Out</a>
@@ -109,7 +108,8 @@
                 }
 
                 const internships = await response.json();
-                internships.filter(internship => internship.status === 'INSURANCE_UPLOADED' || internship.status === 'COMPLETED').forEach(async (internship, index) => {
+
+                internships.forEach((internship, index) => {
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
@@ -121,10 +121,9 @@
                 <td>${internship.notes || ''}</td>
                 
             `;
-            internshipTableBody.appendChild(row);
 
+                    internshipTableBody.appendChild(row);
                 });
-
             } catch (error) {
                 console.error('Error fetching internships:', error);
             }

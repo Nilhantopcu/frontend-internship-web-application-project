@@ -187,7 +187,7 @@ document.getElementById('internshipForm').addEventListener('submit', async funct
             const internshipID = result.id;
             localStorage.setItem('internshipId', internshipID);
             alert('Internship application submitted successfully!');
-            window.location.href = '/view/student/step2.html'; // Yönlendirme işlemi burada gerçekleşir.
+            window.location.href = '/view/student/internship_application_step2.html'; // Yönlendirme işlemi burada gerçekleşir.
         } else {
             const errorData = await response.json();
             console.error('Error response:', errorData);
